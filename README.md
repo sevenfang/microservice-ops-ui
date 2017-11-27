@@ -279,7 +279,7 @@ if (store.getters.roles.length === 0) { // 判断当前用户是否已拉取完u
 	];
 	
 	
-##14	vue 实例
+## 14	vue 实例
 	ivew 一国人个人写的框架，美观度和交互性都不错，有种介于Element和Ant之间的感觉，之前和element团队小小的撕了一下，有兴趣的自己去围观吧，框架还是很不做的，一个人能做出这样，也是很不容易的。作者公开信件
 	vue-admin 也是一个不错的选择，代码写的和不错，官方也出了一个admin的架子，也很值得借鉴
 	vue-material 一个material design vue框架库
