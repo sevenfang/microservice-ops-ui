@@ -61,7 +61,7 @@
     </el-table-column> 
       <el-table-column width="150px" align="center" label="服务名称">
       <template scope="scope">
-          <span>{{scope.row.service_name}}</span>
+          <span>{{scope.row.serviceName}}</span>
       </template>
     </el-table-column>
 
@@ -100,7 +100,7 @@
     <el-form :model="form" :rules="rules" ref="form" label-width="100px">
 
         
-        <el-form-item label="过滤名称" prop="service_name">
+        <el-form-item label="过滤名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入过滤名称"></el-input>
         </el-form-item>
         <el-form-item label="过滤类型" prop="name">
@@ -126,8 +126,8 @@
         <el-form-item label="版次" prop="description">
           <el-input v-model="form.version" autosize placeholder="请输入版次"></el-input>
         </el-form-item>
-         <el-form-item label="服务名称" prop="service_name">
-          <el-input v-model="form.service_name" placeholder="请输入服务名称"></el-input>
+         <el-form-item label="服务名称" prop="serviceName">
+          <el-input v-model="form.serviceName" placeholder="请输入服务名称"></el-input>
         </el-form-item> 
       <el-form-item label="过滤脚本" prop="description"> 
         <el-input type="textarea" v-model="form.script" placeholder="请输入过滤脚本"  :autosize="{ minRows: 5, maxRows: 8}"></el-input>
@@ -175,7 +175,7 @@ export default {
     return {
       form: {
         name: undefined,
-        service_name: undefined,
+        serviceName: undefined,
         type: undefined,
         orders: undefined,
         execSetting: false,
