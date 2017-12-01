@@ -58,9 +58,10 @@ const permission = {
     }, menus) {
       return new Promise(resolve => {
         fetchAll().then(data => {
+          const menudatas = data.data;
           const menuDatas = {};
-          for (let i = 0; i < data.length; i++) {
-            menuDatas[data[i].code] = data[i];
+          for (let i = 0; i < menudatas.length; i++) {
+            menuDatas[menudatas[i].code] = menudatas[i];
           }
           const accessedRouters = filterAsyncRouter(asyncRouterMap, menus, menuDatas);
           console.log(accessedRouters);

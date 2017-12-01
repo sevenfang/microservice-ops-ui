@@ -73,6 +73,18 @@ export const constantRouterMap = [{
   }]
 },
 {
+  path: '/gate/groovyFilter',
+  component: Layout,
+  redirect: '/gate/filter',
+  icon: 'form',
+  noDropdown: true,
+  children: [{
+    path: '/',
+    component: _import('gate/filter'),
+    name: '动态过滤'
+  }]
+},
+{
   path: '/message',
   component: Layout,
   redirect: '/message/index',
@@ -145,5 +157,13 @@ export const asyncRouterMap2 = [{
     component: _import('gate/index'),
     name: '路由列表操作',
     authority: 'gate'
-  }]
+  }
+  // , {
+  //   path: 'groovyFilter',
+  //   icon: 'viewlist',
+  //   component: _import('gate/filter'),
+  //   name: '操作日志管理',
+  //   authority: 'gateLogManager'
+  // }
+  ]
 }];
