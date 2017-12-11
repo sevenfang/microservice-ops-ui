@@ -103,11 +103,10 @@
             <el-button size="small" type="info"  @click="showScript(scope.row.data)">查看</el-button>
         </template>
     </el-table-column> 
-    <!-- <el-table-column width="100px" align="center" label="详情">
-    </el-table-column>  -->
+
     <el-table-column width="200px" align="center" label="操作">
         <template scope="scope">
-            <el-button size="small" type="info"  @click="showScript(scope.row.data)">详情</el-button>
+            <el-button size="small" type="info"  @click="showDetail(scope.row)">消费详情</el-button>
             <el-button size="small" type="info"  @click="showScript(scope.row.data)">重发</el-button>
         </template>
     </el-table-column> 
@@ -117,57 +116,6 @@
   <div v-show="!listLoading" class="pagination-container">
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
   </div>
-
-  <!-- 模态框 -->
-  <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-
-    
-    
-    <el-form :model="form" :rules="rules" ref="form" label-width="100px">
-
-        
-        <el-form-item label="过滤名称" prop="name">
-          <el-input v-model="form.name" placeholder="请输入过滤名称"></el-input>
-        </el-form-item>
-        <el-form-item label="过滤类型" prop="name">
-          <el-input v-model="form.type" placeholder="请输入过滤类型"></el-input>
-        </el-form-item>
-        <el-form-item label="执行顺序" prop="url">
-          <el-input v-model="form.orders" placeholder="请输入执行顺序"></el-input>
-        </el-form-item> 
-
-      <el-form-item label="执行环境">
-        <el-radio-group v-model="form.execSetting"  border=true size="medium">
-          <el-radio  label="true">是</el-radio>
-          <el-radio  label="false">否</el-radio>
-        </el-radio-group>
-      </el-form-item>
-
-      <el-form-item label="金丝雀环境">
-        <el-radio-group v-model="form.canarySetting" size="medium">
-          <el-radio  label="true">是</el-radio>
-          <el-radio  label="false">否</el-radio>
-        </el-radio-group>
-      </el-form-item>
-        <el-form-item label="版次" prop="description">
-          <el-input v-model="form.version" autosize placeholder="请输入版次"></el-input>
-        </el-form-item>
-         <el-form-item label="服务名称" prop="serviceName">
-          <el-input v-model="form.serviceName" placeholder="请输入服务名称"></el-input>
-        </el-form-item> 
-      <el-form-item label="过滤脚本" prop="description"> 
-        <el-input type="textarea" v-model="form.script" placeholder="请输入过滤脚本"  :autosize="{ minRows: 5, maxRows: 8}"></el-input>
-      </el-form-item> 
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="cancel('form')">取 消</el-button>
-      <el-button v-if="dialogStatus=='create'" type="primary" @click="create('form')">确 定</el-button>
-      <el-button v-else type="primary" @click="update('form')">确 定</el-button>
-    </div>
-  </el-dialog>
-
-
-
 
     <!-- 详情模态框 -->
   <el-dialog  title="消息体"  :visible.sync="dialogForScript">
@@ -182,6 +130,9 @@
     </div>
   </el-dialog>
 
+  <el-dialog :title="dialogDetailName" size="large" :visible.sync="dialogDetailVisible">
+      <message-detail :msgKey="msgKey"  @closeMessageDetailDialog="closeMessageDetailDialog" ref="messageDetail"></message-detail>
+  </el-dialog>
 </div>
 </template>
 
@@ -193,6 +144,9 @@ import {
 import { mapGetters } from "vuex";
 export default {
   name: "messages",
+  components:{
+    'message-detail': () => import('./components/messageDetail')
+  },
   data() {
     return {
       form: {
@@ -210,16 +164,20 @@ export default {
       list: null,
       total: null,
       listLoading: true,
+      dialogDetailVisible: false,
+      dialogDetailName: '消费详情',
+      msgKey:'xsr',
       listQuery: {
         page: 1,
         limit: 20,
-        serviceId: undefined,
         msgKey:'',
         exchangeName:'',
         sender:'',
         host:'',
         occurStartTime:'',
-        occurEndTime:''
+        occurEndTime:'',
+        orderBy:'occurTime',
+        orderType:'desc',
       },
       dialogForScript: false,
       showScriptdata: undefined,
@@ -297,72 +255,7 @@ export default {
       this.listQuery.page = val;
       this.getList();
     },
-    handleCreate() {
-      this.resetTemp();
-      this.dialogStatus = "create";
-      this.dialogFormVisible = true;
-    },
-    // 更新列表
-    handleUpdate(row) {
-      getObj(row.id).then(response => {
-        this.form = response.data;
-        this.dialogFormVisible = true;
-        this.dialogStatus = "update";
-      });
-    },
-    
-    create(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          addObj(this.form).then(() => {
-            this.dialogFormVisible = false;
-            this.getList();
-            this.$notify({
-              title: "成功",
-              message: "创建成功",
-              type: "success",
-              duration: 2000
-            });
-          });
-        } else {
-          return false;
-        }
-      });
-    },
-    cancel(formName) {
-      this.dialogFormVisible = false;
-      this.$refs[formName].resetFields();
-    },
-    update(formName) {
-      const set = this.$refs;
-      set[formName].validate(valid => {
-        if (valid) {
-          this.dialogFormVisible = false;
-          this.form.password = undefined;
-          putObj(this.form.id, this.form).then(() => {
-            this.dialogFormVisible = false;
-            this.getList();
-            this.$notify({
-              title: "成功",
-              message: "创建成功",
-              type: "success",
-              duration: 2000
-            });
-          });
-        } else {
-          return false;
-        }
-      });
-    },
-    resetTemp() {
-      this.form = {
-        path: undefined,
-        serviceId: undefined,
-        url: undefined,
-        stripPrefix: undefined,
-        retryable: undefined
-      };
-    },
+ 
     formatJson(json, options) {
       var reg = null,
           formatted = '',
@@ -431,6 +324,18 @@ export default {
     getLocalTime(ms) {
       if(ms==null) return null;
       return new Date(parseInt(ms)).toLocaleString('chinese',{hour12:false}).replace(/年|月/g, "-").replace(/日/g, " ");
+    },
+    showDetail(row) {
+      this.dialogDetailVisible = true;
+      this.msgKey = row.msgKey;
+      if (this.$refs.messageDetail !== undefined) {
+        console.log(row.msgKey);
+        this.$refs.messageDetail.msgKey = this.msgKey;
+        this.$refs.messageDetail.getMessageDetail();
+      }
+    },    
+    closeMessageDetailDialog() {
+      this.dialogDetailVisible = false;
     }
   }
 };

@@ -14,3 +14,10 @@ export function getMessage(id) {
         method: 'get'
     })
 }
+
+export function getConsumedInfoList(id) {
+    return fetch({
+        url: '/api/message/mq/consumedInfo/list/' + id,
+        method: 'get'
+    })
+}
