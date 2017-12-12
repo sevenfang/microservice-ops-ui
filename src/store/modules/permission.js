@@ -1,6 +1,5 @@
 import {
   asyncRouterMap,
-  asyncRouterMap2,
   constantRouterMap
 } from 'src/router'
 import { fetchAll } from 'api/admin/menu/index';
@@ -64,8 +63,6 @@ const permission = {
             menuDatas[menudatas[i].code] = menudatas[i];
           }
           const accessedRouters = filterAsyncRouter(asyncRouterMap, menus, menuDatas);
-          console.log(accessedRouters);
-          console.log('我的这里显示');
           commit('SET_ROUTERS', accessedRouters);
           resolve();
         });

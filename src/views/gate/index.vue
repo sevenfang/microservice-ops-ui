@@ -210,7 +210,6 @@ export default {
     getList() {
       this.listLoading = true;
       page(this.listQuery).then(response => {
-        console.log("走这里了吗");
         this.list = response.data.rows;
         this.total = response.data.total;
         this.listLoading = false;
