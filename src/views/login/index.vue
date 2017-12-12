@@ -1,7 +1,7 @@
 <template>
 <div class="login-container">
   <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px" class="card-box login-form">
-    <h3 class="title">系统登录</h3>
+    <h3 class="title">用友汽车运维平台登录</h3>
     <el-form-item prop="username">
       <span class="svg-container"><icon-svg icon-class="jiedianyoujian"></icon-svg></span>
       <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="账户"></el-input>
@@ -156,7 +156,8 @@ export default {
 .login-container {
     @include relative;
     height: 100vh;
-    background-color: #2d3a4b;
+    // background-color: #2d3a4b;
+      background-color: #3A71A8;
     input:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 1000px #293444 inset !important;
         -webkit-text-fill-color: #fff !important;

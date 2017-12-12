@@ -97,7 +97,7 @@ export default {
       formAdd: true,
       formStatus: '',
       showElement: false,
-      typeOptions: ['menu', 'dirt'],
+      typeOptions: ['menu', 'dirt','http'],
       listQuery: {
         name: undefined
       },

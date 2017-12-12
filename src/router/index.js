@@ -80,7 +80,7 @@ export const constantRouterMap = [{
   children: [{
     path: '/',
     component: _import('gate/filter'),
-    name: '动态过滤'
+    name: 'filter过滤'
   }]
 },
 {
@@ -92,7 +92,7 @@ export const constantRouterMap = [{
   children: [{
     path: '/',
     component: _import('gate/authprovider'),
-    name: '动态过滤'
+    name: '第三方认证'
   }]
 },
 {
@@ -104,7 +104,7 @@ export const constantRouterMap = [{
   children: [{
     path: '/',
     component: _import('gate/gateIgnoreUri'),
-    name: '动态过滤'
+    name: 'ignoreURi'
   }]
 },
 
@@ -117,7 +117,31 @@ export const constantRouterMap = [{
   children: [{
     path: 'index',
     component: _import('message/index'),
-    name: '路由列表操作'
+    name: '消息中心'
+  }]
+},
+{
+  path: '/monitor/eureka',
+  component: Layout,
+  redirect: '/hyperlink/common/index',
+  icon: 'form',
+  noDropdown: true,
+  children: [{
+    path: '/',
+    component: _import('hyperlink/common/index'),
+    name: '注册中心'
+  }]
+},
+{
+  path: '/monitor/pinpoint',
+  component: Layout,
+  redirect: '/hyperlink/common/index',
+  icon: 'form',
+  noDropdown: true,
+  children: [{
+    path: '/',
+    component: _import('hyperlink/common/index'),
+    name: 'pinpoint'
   }]
 }
 ]
@@ -130,7 +154,11 @@ export default new Router({
   routes: constantRouterMap
 })
 
-export const asyncRouterMap = [{
+
+// 动态需要根据权限加载的路由表
+
+export const asyncRouterMap = [
+  {
   path: '/baseManager',
   component: Layout,
   name: '基础配置管理',
@@ -167,27 +195,44 @@ export const asyncRouterMap = [{
     name: '操作日志管理',
     authority: 'gateLogManager'
   }]
-}]
-
-export const asyncRouterMap2 = [{
-  path: '/gateManager',
-  component: Layout,
-  name: '路由列表',
-  icon: 'setting',
-  authority: 'gateManager',
-  children: [{
-    path: 'gateList',
-    icon: 'fa-user',
-    component: _import('gate/index'),
-    name: '路由列表操作',
-    authority: 'gate'
-  }
-  // , {
-  //   path: 'groovyFilter',
-  //   icon: 'viewlist',
-  //   component: _import('gate/filter'),
-  //   name: '操作日志管理',
-  //   authority: 'gateLogManager'
-  // }
-  ]
-}]
+}
+// ,
+// {
+//   path: '/baseManager',
+//   component: Layout,
+//   name: '基础配置管理',
+//   icon: 'setting',
+//   authority: 'baseManager',
+//   children: [{
+//     path: 'userManager',
+//     icon: 'fa-user',
+//     component: _import('admin/user/index'),
+//     name: '用户管理',
+//     authority: 'userManager'
+//   }, {
+//     path: 'menuManager',
+//     icon: 'category',
+//     component: _import('admin/menu/index'),
+//     name: '菜单管理',
+//     authority: 'menuManager'
+//   }, {
+//     path: 'groupManager',
+//     icon: 'group_fill',
+//     component: _import('admin/group/index'),
+//     name: '角色权限管理',
+//     authority: 'groupManager'
+//   }, {
+//     path: 'groupTypeManager',
+//     icon: 'fa-users',
+//     component: _import('admin/groupType/index'),
+//     name: '角色类型管理',
+//     authority: 'groupTypeManager'
+//   }, {
+//     path: 'gateLogManager',
+//     icon: 'viewlist',
+//     component: _import('admin/gateLog/index'),
+//     name: '操作日志管理',
+//     authority: 'gateLogManager'
+//   }]
+// }
+]

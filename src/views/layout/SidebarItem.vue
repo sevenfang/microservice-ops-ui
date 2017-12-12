@@ -15,12 +15,24 @@
 			</template>
 			<template v-for="child in item.children">
 				<sidebar-item class='nest-menu' v-if='child.children&&child.children.length>0' :routes='[child]'> </sidebar-item>
-				<router-link v-else :to="'/'+item.code+'/'+child.code">
-					<el-menu-item :index="item.code+'/'+child.code">
-						<icon-svg v-if='child.icon' :icon-class="child.icon"></icon-svg>
-						<span>{{child.title}}</span>
-					</el-menu-item>
-				</router-link>
+				<div v-else>
+					<div>
+							<router-link v-if="child.type!='http'"  :to="{path:'/'+item.code+'/'+child.code}">
+								<el-menu-item :index="item.code+'/'+child.code">
+									<icon-svg v-if='child.icon' :icon-class="child.icon"></icon-svg>
+									<span>{{child.title}}</span>
+								</el-menu-item>
+							</router-link>
+							<router-link v-else  :to="{path:'/'+item.code+'/'+child.code,query: { href: child.href }}" @click.native="linkvalue(child.href)" replace>
+								<el-menu-item :index="item.code+'/'+child.code">
+									<icon-svg v-if='child.icon' :icon-class="child.icon"></icon-svg>
+									<span>{{child.title}}</span>
+								</el-menu-item>
+							</router-link>
+					</div>
+					
+				</div>
+				
 			</template>
 		</el-submenu>
 
@@ -36,7 +48,23 @@
       routes: {
         type: Array
       }
-    }
+    },
+  data () {
+      return { 
+        hyperlink_url:'',
+        loading: false,
+        html: ''
+      }
+    }, 
+	methods:{
+	linkvalue(href){
+		// this.hyperlink_url=
+			// alert(href);
+	}
+	},
+	  mounted () {
+     	this.hyperlink_url='';
+    },
   }
 </script>
 

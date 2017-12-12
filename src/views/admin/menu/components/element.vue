@@ -18,18 +18,18 @@
 </template>
 
 </el-table-column>
-    <el-table-column width="200px" align="center" label="资源类型"><template scope="scope">
-  <span>
-    {{scope.row.type}}</span>
-</template>
+    <el-table-column width="200px" align="center" label="资源类型">
+      <template scope="scope">
+        <span>{{scope.row.type}}</span>
+      </template>
+    </el-table-column>
 
-</el-table-column>
-    <el-table-column width="200px" align="center" label="资源名称"><template scope="scope">
-  <span>
-    {{scope.row.name}}</span>
-</template>
-
-</el-table-column>
+    <el-table-column width="200px" align="center" label="资源名称">
+      <template scope="scope">
+        <span>{{scope.row.name}}</span>
+      </template>
+    </el-table-column>
+    
     <el-table-column width="200px" align="center" label="资源地址"><template scope="scope">
   <span>
     {{scope.row.uri}}</span>
