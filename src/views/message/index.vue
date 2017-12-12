@@ -16,7 +16,8 @@
         type="datetime"
         placeholder="选择日期时间"
         align="right"
-        :picker-options="pickerOptions1">
+        :picker-options="pickerOptions1"
+        @change="getOccurStartTimeStamp">
       </el-date-picker>
       <span class="demonstration">发送结束时间</span>
       <el-date-picker
@@ -24,14 +25,15 @@
         type="datetime"
         placeholder="选择日期时间"
         align="right"
-        :picker-options="pickerOptions1">
+        :picker-options="pickerOptions1"
+        @change="getOccurEndTimeStamp">
       </el-date-picker>
       <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
     </div>
   </div>
   
 <el-table :key='tableKey' :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%">
-    <el-table-column  type="index" :index="indexMethod">
+    <el-table-column  width="60px" type="index" :index="indexMethod">
     </el-table-column>
   
     <el-table-column width="150px" align="center" label="IP">
@@ -159,14 +161,12 @@ export default {
         version: undefined,
         script: undefined
       },
-      rules: { 
-      },
       list: null,
       total: null,
       listLoading: true,
       dialogDetailVisible: false,
       dialogDetailName: '消费详情',
-      msgKey:'xsr',
+      msgKey:'',
       listQuery: {
         page: 1,
         limit: 20,
@@ -181,15 +181,6 @@ export default {
       },
       dialogForScript: false,
       showScriptdata: undefined,
-      dialogFormVisible: false,
-      dialogStatus: "",
-      groupTypeManager_btn_edit: false,
-      groupTypeManager_btn_del: false,
-      groupTypeManager_btn_add: false,
-      textMap: {
-        update: "编辑",
-        create: "创建"
-      },
       tableKey: 1,
       pickerOptions1: {
           shortcuts: [{
@@ -217,13 +208,6 @@ export default {
   },
   created() {
     this.getList();
-    this.groupTypeManager_btn_edit = this.elements["groupTypeManager:btn_edit"];
-    this.groupTypeManager_btn_del = this.elements["groupTypeManager:btn_del"];
-    this.groupTypeManager_btn_add = this.elements["groupTypeManager:btn_add"];
-  },
-  computed: {
-    //获取state里面的listName对象
-    ...mapGetters(["elements"])
   },
   methods: {
     showScript(message) {
@@ -336,6 +320,12 @@ export default {
     },    
     closeMessageDetailDialog() {
       this.dialogDetailVisible = false;
+    },
+    getOccurStartTimeStamp(date){
+      this.listQuery.occurStartTime = Date.parse(date);
+    },
+    getOccurEndTimeStamp(date){
+      this.listQuery.occurEndTime = Date.parse(date);
     }
   }
 };
