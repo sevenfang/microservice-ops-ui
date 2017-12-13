@@ -121,6 +121,18 @@ export const constantRouterMap = [{
   }]
 },
 {
+  path: '/service',
+  component: Layout,
+  redirect: '/service/index',
+  icon: 'form',
+  noDropdown: true,
+  children: [{
+    path: 'index',
+    component: _import('service/index'),
+    name: '服务列表'
+  }]
+},
+{
   path: '/monitor/eureka',
   component: Layout,
   redirect: '/hyperlink/common/index',

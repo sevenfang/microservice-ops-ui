@@ -169,7 +169,7 @@ export default {
       msgKey:'',
       listQuery: {
         page: 1,
-        limit: 20,
+        limit: 10,
         msgKey:'',
         exchangeName:'',
         sender:'',
