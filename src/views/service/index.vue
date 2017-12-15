@@ -13,17 +13,17 @@
 </template>
 </el-table-column> 
 
-      <el-table-column width="200px" align="center" label="IP"><template scope="scope">
+      <el-table-column width="150px" align="center" label="Host"><template scope="scope">
   <span>
     {{scope.row.hostName}}</span>
 </template>
 </el-table-column>  
-      <el-table-column align="center" label="端口" width="165">
+      <el-table-column align="center" label="端口" width="100">
         <template scope="scope">
           <span>{{scope.row.port}}</span>
 </template>
 </el-table-column>
-<el-table-column width="200px" align="center" label="状态"><template scope="scope">
+<el-table-column width="100px" align="center" label="状态"><template scope="scope">
   <span>
     {{scope.row.status}}</span>
 </template>
@@ -41,12 +41,12 @@
 </template>
 
 </el-table-column>
-<el-table-column width="120px" align="center" label="swagger-ui"><template scope="scope">
-    <a :href="scope.row.homePageUrl + 'swagger-ui.html'" target="_blank">swagger-ui </a>
+<el-table-column width="120px" align="center" label="SWAGGER"><template scope="scope">
+    <a :href="scope.row.homePageUrl + 'swagger-ui.html'" target="_blank">swagger-ui</a>
 </template>
 
 </el-table-column>
-<el-table-column width="90px" align="center" label="durid"><template scope="scope">
+<el-table-column width="90px" align="center" label="DURID"><template scope="scope">
     <a :href="scope.row.homePageUrl + 'druid/login.html'" target="_blank">durid</a>
 </template>
       </el-table-column>
