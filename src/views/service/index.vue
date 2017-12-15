@@ -50,12 +50,18 @@
     <a :href="scope.row.homePageUrl + 'druid/login.html'" target="_blank">durid</a>
 </template>
       </el-table-column>
+
+  <el-table-column width="100px" align="center" label="操作">
+      <template scope="scope">
+          <el-button size="small" type="info"  @click="deleteInstance(scope.row)">注销</el-button>
+      </template>
+  </el-table-column>       
          </el-table>
     </div>
 </template>
 
 <script>
-import { getService } from "api/service/index";
+import { getService,delInstance} from "api/service/index";
 export default {
   name: "serviceInfo",
   data() {
@@ -74,6 +80,23 @@ export default {
       getService().then(response => {
         this.list = response.data;
         this.listLoading = false;
+      });
+    },
+    deleteInstance(row){
+      this.$confirm("是否真要注销?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        delInstance(row.appName, row.instanceId).then(() => {
+          this.$notify({
+            title: "成功",
+            message: "注销成功",
+            type: "success",
+            duration: 2000
+          });
+          getServiceInfo();
+        });
       });
     },
     getLocalTime(ms) {

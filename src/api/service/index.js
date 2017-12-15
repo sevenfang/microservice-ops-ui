@@ -6,3 +6,10 @@ export function getService() {
         method: 'get'
     })
 }
+
+export function delInstance(appID, instanceID) {
+    return fetch({
+        url: '/api/service/delete/' + appID + '/' + instanceID,
+        method: 'delete'
+    })
+}
