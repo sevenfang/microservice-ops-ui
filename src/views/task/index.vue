@@ -80,10 +80,10 @@
             <el-option label="Bean类型" value="executeBean"></el-option>
           </el-select>
         </el-form-item> 
-      <el-form-item label="cron表达式" prop="description">
+      <el-form-item label="cron表达式" prop="cronExpression">
         <el-input v-model="form.cronExpression" placeholder="请输入cron表达式"></el-input>
       </el-form-item>
-      <el-form-item label="执行的url" prop="description">
+      <el-form-item label="执行的url" prop="url">
         <el-input v-model="form.url" placeholder="请输入执行的url"></el-input>
       </el-form-item>
 
@@ -180,11 +180,12 @@ export default {
     },
     resetTemp() {
       this.form = {
-        path: undefined,
-        serviceId: undefined,
+         jobGroup: undefined,
+        jobName: undefined,
+        executeType: undefined,
+        cronExpression: undefined,
         url: undefined,
-        stripPrefix: undefined,
-        retryable: undefined
+        description:undefined
       };
     },
     handleStop(row){
@@ -243,7 +244,7 @@ export default {
     create(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert(1);
+          // alert(1);
           addObj(this.form).then(() => {
             this.dialogFormVisible = false;
             this.getList();
