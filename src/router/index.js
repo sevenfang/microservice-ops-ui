@@ -121,6 +121,18 @@ export const constantRouterMap = [{
   }]
 },
 {
+  path: '/tasklist',
+  component: Layout,
+  redirect: '/task/index',
+  icon: 'form',
+  noDropdown: true,
+  children: [{
+    path: 'index',
+    component: _import('task/index'),
+    name: '计划任务'
+  }]
+},
+{
   path: '/service',
   component: Layout,
   redirect: '/service/index',

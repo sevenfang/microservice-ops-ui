@@ -32,23 +32,25 @@ module.exports = {
         proxyTable: {
           '/jwt': {
             // target: 'http://localhost:8765',
-            target: 'http://localhost:8766',
-            // target: 'http://10.180.4.222:9000',
+            // target: 'http://localhost:8766',
+            target: 'http://10.180.4.222:9000',
             pathRewrite: {
               '^/jwt': '/jwt'
             },
           },
           '/api':{
             // target: 'http://localhost:8765',
-            target: 'http://localhost:8766',
-            // target: 'http://10.180.4.222:9000',
+            // target: 'http://localhost:8766',
+            target: 'http://10.180.4.222:9000',
             pathRewrite: {
               '^/api': '/api'
             },
           },
-          '/zc':{ 
-            target: 'http://10.180.4.222:9002', 
-            changeOrigin: true
+          '/task':{ 
+            target: 'http://127.0.0.1:8001', 
+            pathRewrite: {
+              '^/task': '/task'
+            },
           }
           
         },
