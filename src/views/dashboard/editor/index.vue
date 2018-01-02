@@ -1,8 +1,8 @@
 <template>
 <div class="dashboard-editor-container">
-  <el-carousel indicator-position="outside">
+  <el-carousel indicator-position="outside" height="700px" :interval="5000"   arrow="always">
     <el-carousel-item v-for="data in list" :key="data.list">
-       <img v-bind:src="data.src">
+       <img class="imgc" v-bind:src="data.src" >
       </el-carousel-item>
   </el-carousel>
   </div>
@@ -15,12 +15,12 @@ export default {
     return {
       list: [
         { src: "../../../static/tinymce/skins/lightgray/img/model.jpg" },
-        {
+        // {
         //   src: "http://www.caiqi.com/upload/image/19/2017-06-07/2017060711393060.jpg"
-        },
-        { src: "../static/images/B1.jpg" },
-        { src: "../static/images/B3.jpg" }
-      ]
+        // },
+        
+	  ],
+	   height:'3000px'
     };
   }
 };
@@ -42,4 +42,11 @@ export default {
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
 }
+.imgc { 
+	position: relative;
+	left:10%;
+  	top:10%; 
+ 
+}
+ 
 </style>
