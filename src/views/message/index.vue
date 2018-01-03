@@ -30,19 +30,15 @@
       </el-date-picker>
       <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
     </div>
+    <span class="demonstration">状态</span>
+    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="状态" v-model="listQuery.exchangeName"> </el-input>
+    <span class="demonstration">内容</span>
+    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="内容" v-model="listQuery.exchangeName"> </el-input>
   </div>
   
-<el-table :key='tableKey' :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%">
-    <el-table-column  width="60px" type="index" :index="indexMethod">
-    </el-table-column>
-  
-    <el-table-column width="150px" align="center" label="IP">
-        <template scope="scope">
-            <span>{{scope.row.host}}</span>
-        </template>
-    </el-table-column>
+<el-table :key='tableKey' :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%" height="460">
 
-    <el-table-column width="350px" align="center" label="msgKey">
+    <el-table-column fixed width="350px" align="center" label="msgKey">
         <template scope="scope">
             <span> {{scope.row.msgKey}}</span>
         </template>
@@ -98,6 +94,12 @@
       <template scope="scope">
           <span>{{getLocalTime(scope.row.consumeSuccessTime)}}</span>
       </template>
+    </el-table-column>
+    
+    <el-table-column width="150px" align="center" label="IP">
+        <template scope="scope">
+            <span>{{scope.row.host}}</span>
+        </template>
     </el-table-column>
 
     <el-table-column width="100px" align="center" label="消息体">
