@@ -109,7 +109,7 @@ export const constantRouterMap = [{
 },
 
 {
-  path: '/message',
+  path: '/messageManage',
   component: Layout,
   redirect: '/message/index',
   icon: 'form',
