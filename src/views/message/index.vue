@@ -28,12 +28,14 @@
         :picker-options="pickerOptions1"
         @change="getOccurEndTimeStamp">
       </el-date-picker>
-      <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
     </div>
-    <span class="demonstration">状态</span>
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="状态" v-model="listQuery.exchangeName"> </el-input>
+    <span class="demonstration">发送状态</span>
+    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="发送状态" v-model="listQuery.produceStatus"> </el-input>
+    <span class="demonstration">消费状态</span>
+    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="消费状态" v-model="listQuery.consumeStatus"> </el-input>
     <span class="demonstration">内容</span>
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="内容" v-model="listQuery.exchangeName"> </el-input>
+    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="内容" v-model="listQuery.data"> </el-input>
+    <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
   </div>
   
 <el-table :key='tableKey' :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%" height="460">
@@ -44,17 +46,18 @@
         </template>
     </el-table-column>
 
-    <el-table-column width="150px" align="center" label="状态">
+    <el-table-column width="150px" align="center" label="发送状态">
         <template scope="scope">
-            <span>{{scope.row.status}}</span>
+            <span>{{scope.row.produceStatus}}</span>
+        </template>
+    </el-table-column> 
+
+    <el-table-column width="150px" align="center" label="消费状态">
+        <template scope="scope">
+            <span>{{scope.row.consumeStatus}}</span>
         </template>
     </el-table-column> 
     
-    <el-table-column width="150px" align="center" label="是否成功">
-        <template scope="scope">
-            <span>{{scope.row.success}}</span>
-        </template>
-    </el-table-column> 
     <el-table-column width="180px" align="center" label="生成时间">
       <template scope="scope">
           <span>{{getLocalTime(scope.row.occurTime)}}</span>
@@ -178,6 +181,9 @@ export default {
         host:'',
         occurStartTime:'',
         occurEndTime:'',
+        produceStatus:'',
+        consumeStatus:'',
+        data:'',
         orderBy:'occurTime',
         orderType:'desc',
       },
