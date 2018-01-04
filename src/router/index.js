@@ -133,6 +133,19 @@ export const constantRouterMap = [{
   }]
 },
 {
+  path: '/tasklist/tasklog',
+  component: Layout,
+  redirect: '/task/tasklog',
+  icon: 'form',
+  noDropdown: true,
+  children: [{
+    path: '/',
+    component: _import('task/tasklog'),
+    name: '计划任务'
+  }]
+},
+
+{
   path: '/service',
   component: Layout,
   redirect: '/service/index',

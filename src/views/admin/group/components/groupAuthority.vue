@@ -11,10 +11,8 @@
   <el-col :span="16" style='margin-top:15px;'>
     <el-table ref="elementTable" :data="list" border fit highlight-current-row @select="handleSelectionChange" style="width: 100%">
       <el-table-column v-if="groupManager_element" type="selection" width="55"> </el-table-column>
-      <el-table-column width="200px" align="center" label="资源编码"><template scope="scope">
-    <span>
-        {{scope.row.code}}</span>
-</template>
+      <el-table-column width="200px" align="center" label="资源编码">
+      <template scope="scope"> <span>{{scope.row.code}}</span> </template>
 
 </el-table-column>
     <el-table-column width="200px" align="center" label="资源类型"><template scope="scope">
