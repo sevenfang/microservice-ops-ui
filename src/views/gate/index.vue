@@ -1,7 +1,8 @@
  <template>
 <div class="app-container calendar-list-container">
   <div class="filter-container">
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="姓名或账户" v-model="listQuery.serviceId"> </el-input>
+    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="服务" v-model="listQuery.serviceId"> </el-input>
+    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="路径" v-model="listQuery.path"> </el-input>
     <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
     <el-button class="filter-item" v-if="groupTypeManager_btn_add" style="margin-left: 10px;" @click="handleCreate" type="primary" icon="edit">添加</el-button>
   </div>
@@ -21,7 +22,7 @@
     </el-table-column>
 
 
-    <el-table-column width="200px" align="center" label="服务ID">
+    <el-table-column width="200px" align="center" label="服务名称">
         <template scope="scope">
             <span> {{scope.row.serviceId}}</span>
         </template>
@@ -35,7 +36,7 @@
     </el-table-column>
 
 
-    <el-table-column width="200px" align="center" label="前缀">
+    <el-table-column width="200px" align="center" label="除去前缀">
         <template scope="scope">
         <span>{{scope.row.stripPrefix}}</span>
         </template>
@@ -78,11 +79,18 @@
       <el-form-item label="URL" prop="url">
         <el-input v-model="form.url" placeholder="请输入URL"></el-input>
       </el-form-item>
-      <el-form-item label="前缀" prop="description">
-        <el-input v-model="form.stripPrefix" placeholder="请输入URL"></el-input>
+       
+      <el-form-item label="除去前缀">
+        <el-radio-group v-model="form.stripPrefix"  border=true size="medium">
+          <el-radio  label="true">是</el-radio>
+          <el-radio  label="false">否</el-radio>
+        </el-radio-group>
       </el-form-item>
-      <el-form-item label="是否重置" prop="description">
-        <el-input v-model="form.retryable" placeholder="请输入是否重置"></el-input>
+       <el-form-item label="是否重试">
+        <el-radio-group v-model="form.retryable"  border=true size="medium">
+          <el-radio  label="true">是</el-radio>
+          <el-radio  label="false">否</el-radio>
+        </el-radio-group>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -117,8 +125,8 @@ export default {
           },
           {
             min: 3,
-            max: 20,
-            message: "长度在 3 到 20 个字符",
+            max: 200,
+            message: "长度在 3 到 200 个字符",
             trigger: "blur"
           }
         ],
@@ -137,14 +145,9 @@ export default {
         ],
         url: [
           {
-            required: true,
-            message: "请输入url",
-            trigger: "blur"
-          },
-          {
             min: 3,
-            max: 20,
-            message: "长度在 3 到 20 个字符",
+            max: 200,
+            message: "长度在 3 到 200 个字符",
             trigger: "blur"
           }
         ],
