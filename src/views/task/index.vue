@@ -83,8 +83,11 @@
       <el-form-item label="cron表达式" prop="cronExpression">
         <el-input v-model="form.cronExpression" placeholder="请输入cron表达式"></el-input>
       </el-form-item>
-      <el-form-item label="执行的url" prop="url">
+      <el-form-item label="执行的url" prop="url"  v-if="form.executeType=='executeUrl'">
         <el-input v-model="form.url" placeholder="请输入执行的url"></el-input>
+      </el-form-item>
+      <el-form-item label="执行类名称" prop="beanName"  v-if="form.executeType=='executeBean'">
+        <el-input v-model="form.beanName" placeholder="请输入执行类名称"></el-input>
       </el-form-item>
 
        <el-form-item label="备注" prop="description">
@@ -113,7 +116,8 @@ export default {
         executeType: undefined,
         cronExpression: undefined,
         url: undefined,
-        description:undefined
+        beanName:undefined,
+        description:undefined, 
       },  
       rules: {
         jobName: [
@@ -127,7 +131,7 @@ export default {
             { required: true, message: '请选择任务类型', trigger: 'change' }
           ],
         },
-        
+       
       list: null,
       listLoading: true,
       listQuery: {

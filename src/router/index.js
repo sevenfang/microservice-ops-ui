@@ -60,19 +60,19 @@ export const constantRouterMap = [{
   }]
 },
 {
-  path: '/gate',
+  path: '/router/serviceRouting',
   component: Layout,
   redirect: '/gate/index',
   icon: 'form',
   noDropdown: true,
   children: [{
-    path: 'index',
+    path: '/',
     component: _import('gate/index'),
-    name: '路由列表操作'
+    name: '服务路由'
   }]
 },
 {
-  path: '/gate/groovyFilter',
+  path: '/filter/groovyFilter',
   component: Layout,
   redirect: '/gate/filter',
   icon: 'form',
@@ -80,11 +80,11 @@ export const constantRouterMap = [{
   children: [{
     path: '/',
     component: _import('gate/filter'),
-    name: 'filter过滤'
+    name: '动态过滤器配置'
   }]
 },
 {
-  path: '/gate/gateAuthProvider',
+  path: '/auth/authprovider',
   component: Layout,
   redirect: '/gate/authprovider',
   icon: 'form',
@@ -92,11 +92,11 @@ export const constantRouterMap = [{
   children: [{
     path: '/',
     component: _import('gate/authprovider'),
-    name: '第三方认证'
+    name: '自定义认证'
   }]
 },
 {
-  path: '/gate/gateIgnoreUri',
+  path: '/router/ignoreUri',
   component: Layout,
   redirect: '/gate/gateIgnoreUri',
   icon: 'form',
@@ -104,7 +104,7 @@ export const constantRouterMap = [{
   children: [{
     path: '/',
     component: _import('gate/gateIgnoreUri'),
-    name: 'ignoreURi'
+    name: 'ignoreUri'
   }]
 },
 
