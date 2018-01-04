@@ -113,8 +113,8 @@ export default {
         path: undefined,
         serviceId: undefined,
         url: undefined,
-        stripPrefix: undefined,
-        retryable: undefined
+        stripPrefix: true,
+        retryable: true
       },
       rules: {
         path: [
@@ -146,8 +146,8 @@ export default {
         url: [
           {
             min: 3,
-            max: 200,
-            message: "长度在 3 到 200 个字符",
+            max: 2000,
+            message: "长度在 3 到 2000 个字符",
             trigger: "blur"
           }
         ],
@@ -309,8 +309,8 @@ export default {
         path: undefined,
         serviceId: undefined,
         url: undefined,
-        stripPrefix: undefined,
-        retryable: undefined
+        stripPrefix: "true",
+        retryable: "true"
       };
     }
   }
