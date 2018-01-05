@@ -46,8 +46,8 @@
 </template>
 
 </el-table-column>
-<el-table-column width="90px" align="center" label="DURID"><template scope="scope">
-    <a :href="scope.row.homePageUrl + 'druid'" target="_blank">durid</a>
+<el-table-column width="90px" align="center" label="DRUID"><template scope="scope">
+    <a :href="scope.row.homePageUrl + 'druid'" target="_blank">druid</a>
 </template>
       </el-table-column>
 
