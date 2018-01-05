@@ -33,7 +33,7 @@ module.exports = {
           '/jwt': {
             // target: 'http://localhost:8765',
             // target: 'http://localhost:8766',
-            target: 'http://10.180.4.222:9000',
+            target: 'http://10.180.4.222:9000', 
             pathRewrite: {
               '^/jwt': '/jwt'
             },
@@ -41,7 +41,7 @@ module.exports = {
           '/api':{
             // target: 'http://localhost:8765',
             // target: 'http://localhost:8766',
-            target: 'http://10.180.4.222:9000',
+            target: 'http://10.180.4.222:9000', 
             pathRewrite: {
               '^/api': '/api'
             },
