@@ -1,6 +1,16 @@
 <template>
   <div class="app-container calendar-list-container">
-    <el-table :key='tableKey' :data="list" stripe="true" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%"  height="500">
+  <span class="demonstration">自动更新</span>
+  <el-select v-model="refreshVal" placeholder="请选择" @change="refresh(refreshVal)">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  <el-button class="filter-item" type="primary" v-waves icon="search" @click="getServiceInfo">刷新</el-button>
+  <el-table :key='tableKey' :data="list"  v-loading.body="listLoading" border fit highlight-current-row style="width: 100%"  height="460">
 <el-table-column fixed width="270px" align="center" label="应用名"><template scope="scope">
   <span>
     {{scope.row.appName}}</span>
@@ -37,12 +47,12 @@
 
 </el-table-column>
 <el-table-column width="120px" align="center" label="API清单"><template scope="scope">
-    <a :href="scope.row.homePageUrl + 'swagger-ui.html'" target="_blank">swagger-ui</a>
+    <a :href="scope.row.homePageUrl + 'swagger-ui.html'" target="_blank"><u><i>swagger-ui</i></u></a>
 </template>
 
 </el-table-column>
 <el-table-column width="160px" align="center" label="连接池监控"><template scope="scope">
-    <a :href="scope.row.homePageUrl + 'druid'" target="_blank">druid</a>
+    <a :href="scope.row.homePageUrl + 'druid'" target="_blank"><u><i>druid</i></u></a>
 </template>
       </el-table-column>
 
@@ -63,13 +73,40 @@ export default {
     return {
       list: null,
       listLoading: true,
-      tableKey: 0
+      tableKey: 0,
+      options: [{
+          value: 5*1000,
+          label: '5 seconds'
+        }, {
+          value: 30*1000,
+          label: '30 seconds'
+        }, {
+          value: 5*60*1000,
+          label: '5 minutues'
+        }, {
+          value: 0,
+          label: 'never'
+        }],
+      refreshVal: 0,
+      timer: null
     };
   },
   created() {
     this.getServiceInfo();
   },
   methods: {
+    refresh(intervalTime) {
+      console.log("refresh");
+      if(intervalTime != 0){
+        var self = this;
+        this.timer = setInterval(function(){ 
+          self.getServiceInfo();
+        },intervalTime)
+      } else {
+        console.log("clearInterval");
+        clearInterval(this.timer);
+      }
+    },
     getServiceInfo() {
       this.listLoading = true;
       getService().then(response => {
