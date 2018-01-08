@@ -146,13 +146,13 @@ export const constantRouterMap = [{
 },
 
 {
-  path: '/service',
+  path: '/monitor/serviceManager',
   component: Layout,
   redirect: '/service/index',
   icon: 'form',
   noDropdown: true,
   children: [{
-    path: 'index',
+    path: '/',
     component: _import('service/index'),
     name: '服务列表'
   }]

@@ -7,7 +7,7 @@
 </template>
 
 </el-table-column>
-<el-table-column width="370px" align="center" label="Instance"><template scope="scope">
+<el-table-column width="370px" align="center" label="实例"><template scope="scope">
   <span>
     {{scope.row.instanceId}}</span>
 </template>
@@ -18,11 +18,6 @@
     {{scope.row.hostName}}</span>
 </template>
 </el-table-column>  
-      <el-table-column align="center" label="端口" width="100">
-        <template scope="scope">
-          <span>{{scope.row.port}}</span>
-</template>
-</el-table-column>
 <el-table-column width="100px" align="center" label="状态"><template scope="scope">
   <span>
     {{scope.row.status}}</span>
@@ -41,12 +36,12 @@
 </template>
 
 </el-table-column>
-<el-table-column width="120px" align="center" label="SWAGGER"><template scope="scope">
+<el-table-column width="120px" align="center" label="API清单"><template scope="scope">
     <a :href="scope.row.homePageUrl + 'swagger-ui.html'" target="_blank">swagger-ui</a>
 </template>
 
 </el-table-column>
-<el-table-column width="90px" align="center" label="DRUID"><template scope="scope">
+<el-table-column width="160px" align="center" label="连接池监控"><template scope="scope">
     <a :href="scope.row.homePageUrl + 'druid'" target="_blank">druid</a>
 </template>
       </el-table-column>
@@ -83,7 +78,7 @@ export default {
       });
     },
     deleteInstance(row){
-      this.$confirm("是否真要注销?", "提示", {
+      this.$confirm("是否真要注销(注销后状态更新非实时，请稍等片刻再查询)?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
