@@ -109,13 +109,13 @@ export const constantRouterMap = [{
 },
 
 {
-  path: '/messageManage',
+  path: '/message/mq',
   component: Layout,
   redirect: '/message/index',
   icon: 'form',
   noDropdown: true,
   children: [{
-    path: 'index',
+    path: '/',
     component: _import('message/index'),
     name: '消息中心'
   }]
