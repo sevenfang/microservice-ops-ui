@@ -2,12 +2,21 @@
 <div class="app-container calendar-list-container">
    <div class="filter-container">
     <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="任务名" v-model="listQuery.jobName"> </el-input>
+    
+    <el-date-picker v-model="listQuery.CREATE_DATE_START" @change="getTime" type="datetime" placeholder="选择日期时间"> </el-date-picker>
+    <el-date-picker v-model="listQuery.CREATE_DATE_END"  @change="getTime"  type="datetime" placeholder="选择日期时间"> </el-date-picker>
+
     <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button> 
   </div>  
   
 <el-table :key='tableKey' :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%">
 
-    <el-table-column  type="index" :index="indexMethod">
+    <!-- <el-table-column  type="index" :index="indexMethod">
+    </el-table-column> -->
+  <el-table-column width="130px" align="center" label="cron表达式">
+        <template scope="scope">
+            <span> {{scope.row.id}}</span>
+        </template>
     </el-table-column>
 
     <el-table-column align="center" label="任务名称"  > 
@@ -54,6 +63,10 @@
     </el-table-column> 
 
 </el-table> 
+  <!-- 分页 -->
+  <div v-show="!listLoading" class="pagination-container">
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.pages" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="pages"> </el-pagination>
+  </div>
 </div>
 </template>
 
@@ -69,6 +82,8 @@ export default {
         SCHEDLED_NAME: undefined,
         URL_NAME: undefined, 
         CREATE_DATE: undefined,
+        CREATE_DATE_START:undefined,
+        CREATE_DATE_END:undefined,
         WORK_TIME: undefined,  
         PC_IP: undefined, 
         RESPONSE_INFO: undefined, 
@@ -78,9 +93,17 @@ export default {
        
       },   
       list: null,
+      pages:null,
       listLoading: true,
       listQuery: {
-        jobName: undefined
+        jobName: undefined, 
+        page: 1,
+        pageSize: 10, 
+        CREATE_DATE_START:"",
+        CREATE_DATE_END:"",
+        
+        // orderBy:'WORK_TIME',
+        // orderType:'desc',
       },
       dialogFormVisible: false,
       dialogStatus: "",
@@ -104,8 +127,9 @@ export default {
     //获取列表
     getList() {
       this.listLoading = true;
-      page().then(response => { 
+      page(this.listQuery).then(response => { 
         this.list=response.page.list;
+        this.pages = response.page.pages;
         this.listLoading = false;
       });
     },
@@ -119,6 +143,23 @@ export default {
       if(ms==null) return null;
       return new Date(parseInt(ms)).toLocaleString('chinese',{hour12:false}).replace(/年|月/g, "-").replace(/日/g, " ");
     },
+
+     getOccurStartTimeStamp(date){
+      this.listQuery.occurStartTime = Date.parse(date);
+    },
+
+      handleCurrentChange(val) {
+      this.listQuery.page = val;
+      this.getList();
+    },
+     handleSizeChange(val) {
+      this.listQuery.pageSize = val;
+      this.getList();
+    },
+     getTime(date){
+          this.time = date;
+          console.log(this.time);
+        }
   }
 };
 </script>

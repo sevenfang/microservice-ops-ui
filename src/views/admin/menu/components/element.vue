@@ -64,6 +64,9 @@
     <el-form :model="form" :rules="rules" ref="form" label-width="100px">
       <el-form-item label="资源编码" prop="code">
         <el-input v-model="form.code" placeholder="请输入资源编码"></el-input>
+        <span style="color: red;"> 路径编码+按钮id{btn_add(新增),btn_edit(编辑),btn_del(删除
+),view(查看)}</span>
+        <span style="color: red;">如：userManager:btn_add</span> 
       </el-form-item>
       <el-form-item label="资源类型" prop="type">
          <el-select class="filter-item" v-model="form.type" placeholder="请输入资源类型">

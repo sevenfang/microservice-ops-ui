@@ -36,7 +36,7 @@
     </el-table-column>
 
 
-    <el-table-column width="200px" align="center" label="url/BeanName">
+    <el-table-column width="200px" align="center" label="url">
         <template scope="scope">
             <span>{{scope.row.url}}</span>
         </template>
@@ -74,24 +74,20 @@
       <el-form-item label="任务名" prop="name">
         <el-input v-model="form.jobName" placeholder="请输入任务名"></el-input>
       </el-form-item> 
-      <el-form-item label="任务类型" prop="executeType">
-          <el-select v-model="form.executeType" placeholder="请选择任务类型">
-            <el-option label="URL类型" value="executeUrl"></el-option>
-            <el-option label="Bean类型" value="executeBean"></el-option>
-          </el-select>
+      <el-form-item label="任务类型" prop="executeType">  
+            <el-input v-model="form.executeType" placeholder="请输入任务名" value="executeUrl" :disabled="true"></el-input>
         </el-form-item> 
       <el-form-item label="cron表达式" prop="cronExpression">
         <el-input v-model="form.cronExpression" placeholder="请输入cron表达式"></el-input>
-      </el-form-item>
-      <el-form-item label="执行的url" prop="url"  v-if="form.executeType=='executeUrl'">
-        <el-input v-model="form.url" placeholder="请输入执行的url"></el-input>
-      </el-form-item>
-      <el-form-item label="执行类名称" prop="beanName"  v-if="form.executeType=='executeBean'">
-        <el-input v-model="form.beanName" placeholder="请输入执行类名称"></el-input>
+        <span class="cron-tips"><a  href="http://cron.qqe2.com/" target="_blank"> 在线表达式生成器：http://cron.qqe2.com 如：0 0/1 * * * ?</a> </span>
       </el-form-item>
 
+      <el-form-item label="执行的url" prop="url">
+        <el-input v-model="form.url" placeholder="请输入执行的url"></el-input>
+      </el-form-item>
+       
        <el-form-item label="备注" prop="description">
-        <el-input v-model="form.description" placeholder="备注"></el-input>
+        <el-input v-model="form.description" type="textarea"  placeholder="备注"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -113,7 +109,7 @@ export default {
       form: {
         jobGroup: undefined,
         jobName: undefined,
-        executeType: undefined,
+        executeType: "executeUrl",
         cronExpression: undefined,
         url: undefined,
         beanName:undefined,
@@ -186,7 +182,7 @@ export default {
       this.form = {
          jobGroup: undefined,
         jobName: undefined,
-        executeType: undefined,
+        executeType: "executeUrl",
         cronExpression: undefined,
         url: undefined,
         description:undefined
@@ -271,3 +267,8 @@ export default {
   }
 };
 </script>
+<style lang="postcss">
+.cron-tips{
+  color: red
+}
+</style>

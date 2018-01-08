@@ -19,54 +19,53 @@
     
   
 
-    <el-table-column width="150px" align="center" label="过滤名称">
+    <el-table-column  align="center" label="过滤名称">
         <template scope="scope">
             <span>{{scope.row.name}}</span>
         </template>
     </el-table-column>
 
 
-    <el-table-column width="150px" align="center" label="过滤类型">
+    <el-table-column  align="center" label="过滤类型">
         <template scope="scope">
             <span> {{scope.row.type}}</span>
         </template>
-    </el-table-column>
+    </el-table-column> 
 
-
-    <el-table-column width="100px" align="center" label="执行顺序">
+    <!-- <el-table-column width="100px" align="center" label="执行顺序">
         <template scope="scope">
             <span>{{scope.row.orders}}</span>
         </template>
-    </el-table-column>
+    </el-table-column> -->
 
 
-    <el-table-column width="150px" align="center" label="执行环境">
+    <!-- <el-table-column width="150px" align="center" label="执行环境">
         <template scope="scope">
         <span>{{scope.row.execSetting}}</span>
         </template>
-    </el-table-column>
+    </el-table-column> -->
 
 
-    <el-table-column width="150px" align="center" label="金丝雀环境">
+    <!-- <el-table-column width="150px" align="center" label="金丝雀环境">
         <template scope="scope">
             <span>{{scope.row.canarySetting}}</span>
         </template>
-    </el-table-column> 
+    </el-table-column>  -->
 
     
-    <el-table-column width="150px" align="center" label="版次">
+    <!-- <el-table-column width="150px" align="center" label="版次">
         <template scope="scope">
             <span>{{scope.row.version}}</span>
         </template>
-    </el-table-column> 
-      <el-table-column width="150px" align="center" label="服务名称">
+    </el-table-column>  -->
+      <el-table-column align="center" label="服务名称">
       <template scope="scope">
           <span>{{scope.row.serviceName}}</span>
       </template>
     </el-table-column>
 
     
-    <el-table-column width="100px" align="center" label="过滤脚本">
+    <el-table-column  align="center" label="过滤脚本">
         <template scope="scope">
             <el-button size="small" type="info"  @click="showScript(scope.row)">详情</el-button>
         </template>
@@ -74,7 +73,7 @@
 
 
 
-    <el-table-column align="center" label="操作" width="150">
+    <el-table-column align="center" label="操作" >
       
       <template scope="scope">
         <el-button v-if="groupTypeManager_btn_edit" size="small" type="success" @click="handleUpdate(scope.row)">
@@ -103,29 +102,34 @@
         <el-form-item label="过滤名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入过滤名称"></el-input>
         </el-form-item>
-        <el-form-item label="过滤类型" prop="name">
-          <el-input v-model="form.type" placeholder="请输入过滤类型"></el-input>
-        </el-form-item>
-        <el-form-item label="执行顺序" prop="url">
-          <el-input v-model="form.orders" placeholder="请输入执行顺序"></el-input>
+        
+        <el-form-item label="过滤类型" prop="type">
+          <el-select v-model="form.type" placeholder="请选择任务类型">
+            <el-option label="pre" value="pre"></el-option>
+            <el-option label="post" value="post"></el-option>
+          </el-select>
         </el-form-item> 
 
-      <el-form-item label="执行环境">
+        <!-- <el-form-item label="执行顺序" prop="url">
+          <el-input v-model="form.orders" placeholder="请输入执行顺序"></el-input>
+        </el-form-item>  -->
+
+      <!-- <el-form-item label="执行环境">
         <el-radio-group v-model="form.execSetting"  border=true size="medium">
           <el-radio  label="true">是</el-radio>
           <el-radio  label="false">否</el-radio>
         </el-radio-group>
-      </el-form-item>
+      </el-form-item> -->
 
-      <el-form-item label="金丝雀环境">
+      <!-- <el-form-item label="金丝雀环境">
         <el-radio-group v-model="form.canarySetting" size="medium">
           <el-radio  label="true">是</el-radio>
           <el-radio  label="false">否</el-radio>
         </el-radio-group>
-      </el-form-item>
-        <el-form-item label="版次" prop="description">
+      </el-form-item> -->
+        <!-- <el-form-item label="版次" prop="description">
           <el-input v-model="form.version" autosize placeholder="请输入版次"></el-input>
-        </el-form-item>
+        </el-form-item> -->
          <el-form-item label="服务名称" prop="serviceName">
           <el-input v-model="form.serviceName" placeholder="请输入服务名称"></el-input>
         </el-form-item> 
