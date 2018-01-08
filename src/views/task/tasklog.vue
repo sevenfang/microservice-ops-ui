@@ -1,12 +1,23 @@
  <template>
 <div class="app-container calendar-list-container">
-   <div class="filter-container">
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="任务名" v-model="listQuery.jobName"> </el-input>
-    
-    <el-date-picker v-model="listQuery.CREATE_DATE_START" @change="getTime" type="datetime" placeholder="选择日期时间"> </el-date-picker>
-    <el-date-picker v-model="listQuery.CREATE_DATE_END"  @change="getTime"  type="datetime" placeholder="选择日期时间"> </el-date-picker>
+   <div class="filter-container"> 
+  <el-form :inline="true" :model="listQuery" class="demo-form-inline">
+  <el-form-item label="任务名:">
+    <el-input v-model="listQuery.taskName" placeholder="请输入任务名"></el-input>
+  </el-form-item>
+  <el-form-item label="选择日期时间区间:">
+       <el-date-picker v-model="listQuery.startDate" @change="getStartTime" type="datetime" placeholder="选择日期时间"> </el-date-picker>
+       <el-date-picker v-model="listQuery.endDate"  @change="getEndTime"  type="datetime" placeholder="选择日期时间"> </el-date-picker>
+  </el-form-item>
+  <el-form-item label="业务返回结果:">
+    <el-input v-model="listQuery.responseInfo" placeholder="请输入业务返回结果"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="handleFilter" icon="search">查询</el-button>
+  </el-form-item>
+</el-form>
 
-    <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button> 
+  
   </div>  
   
 <el-table :key='tableKey' :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%">
@@ -81,27 +92,26 @@ export default {
         JOB_GROUP: undefined,  
         SCHEDLED_NAME: undefined,
         URL_NAME: undefined, 
-        CREATE_DATE: undefined,
-        CREATE_DATE_START:undefined,
-        CREATE_DATE_END:undefined,
+        CREATE_DATE: undefined, 
         WORK_TIME: undefined,  
         PC_IP: undefined, 
         RESPONSE_INFO: undefined, 
         RETURN_FLAG: undefined,
         id: undefined, 
         CREATE_BY: undefined, 
-       
       },   
       list: null,
       pages:null,
       listLoading: true,
       listQuery: {
-        jobName: undefined, 
+        taskName: undefined, 
         page: 1,
         pageSize: 10, 
-        CREATE_DATE_START:"",
-        CREATE_DATE_END:"",
-        
+        startDate:"",
+        endDate:"",
+        responseInfo:"",
+        startTime:"",
+        endTime:""
         // orderBy:'WORK_TIME',
         // orderType:'desc',
       },
@@ -143,11 +153,7 @@ export default {
       if(ms==null) return null;
       return new Date(parseInt(ms)).toLocaleString('chinese',{hour12:false}).replace(/年|月/g, "-").replace(/日/g, " ");
     },
-
-     getOccurStartTimeStamp(date){
-      this.listQuery.occurStartTime = Date.parse(date);
-    },
-
+ 
       handleCurrentChange(val) {
       this.listQuery.page = val;
       this.getList();
@@ -156,10 +162,14 @@ export default {
       this.listQuery.pageSize = val;
       this.getList();
     },
-     getTime(date){
-          this.time = date;
-          console.log(this.time);
-        }
+     getStartTime(date){
+          this.listQuery.startTime =new Date(date).getTime()
+          console.log(this.listQuery.startTime);
+        },
+      getEndTime(date){
+      this.listQuery.endTime =new Date(date).getTime()
+      console.log(this.listQuery.endTime);
+    }
   }
 };
 </script>

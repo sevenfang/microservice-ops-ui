@@ -159,7 +159,7 @@ export default {
     //获取列表
     getList() {
       this.listLoading = true;
-      getTasklist().then(response => {
+      getTasklist(this.listQuery).then(response => {
         var row={};
         row=response.page
         this.list=row; 
