@@ -6,11 +6,11 @@ export function addObj(obj) {
     data: obj
   });
 }
-export function getTasklist(obj) {
+export function getTasklist(query) {
   return fetch({
     url: '/task/list.json',
     method: 'get',
-    data: obj
+    params: query
   });
 }
 
