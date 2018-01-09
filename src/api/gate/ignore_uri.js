@@ -1,7 +1,7 @@
 import fetch from 'utils/fetch'
 export function page(query) {
   return fetch({
-    url: '/api/admin/ignoreUri/page',
+    url: '/api/manager/ignoreUri/page',
     method: 'get',
     params: query
   })
@@ -9,7 +9,7 @@ export function page(query) {
 
 export function getGateList(obj){
   return fetch({
-    url: 'api/admin/ignoreUri/all',
+    url: 'api/manager/ignoreUri/all',
     method: 'get',
     data: obj
   })
@@ -17,14 +17,14 @@ export function getGateList(obj){
 
 export function delObj(id) {
   return fetch({
-    url: '/api/admin/ignoreUri/' + id,
+    url: '/api/manager/ignoreUri/' + id,
     method: 'delete'
   })
 }
 
 export function addObj(obj) {
   return fetch({
-    url: '/api/admin/ignoreUri/',
+    url: '/api/manager/ignoreUri/',
     method: 'post',
     data: obj
   })
@@ -32,7 +32,7 @@ export function addObj(obj) {
 
 export function putObj(id, obj) {
   return fetch({
-    url: '/api/admin/ignoreUri/' + id,
+    url: '/api/manager/ignoreUri/' + id,
     method: 'put',
     data: obj
   })
@@ -40,7 +40,7 @@ export function putObj(id, obj) {
 
 export function getObj(id) {
   return fetch({
-    url: '/api/admin/ignoreUri/' + id,
+    url: '/api/manager/ignoreUri/' + id,
     method: 'get'
   })
 }

@@ -125,9 +125,9 @@ export default {
   },
   created() {
     this.getList();
-    this.groupTypeManager_btn_edit = this.elements["groupTypeManager:btn_edit"];
-    this.groupTypeManager_btn_del = this.elements["groupTypeManager:btn_del"];
-    this.groupTypeManager_btn_add = this.elements["groupTypeManager:btn_add"];
+    this.groupTypeManager_btn_edit = this.elements["tasklog:btn_edit"];
+    this.groupTypeManager_btn_del = this.elements["tasklog:btn_del"];
+    this.groupTypeManager_btn_add = this.elements["tasklog:btn_add"];
   },
   computed: {
     //获取state里面的listName对象

@@ -65,10 +65,10 @@
 
       <el-form-item label="规则" style="color: red;">
       资源编码=当前资源编码：btn_</br>
-            userManager:btn_add    button 新增</br>
-            userManager:btn_edit   button 编辑</br>
-            userManager:btn_del    button  删除</br>
-            userManager:view       uri     查看</br>
+            userManager:btn_add  |  button 新增  | /admin/user  |POST</br>
+            userManager:btn_edit |  button 编辑  | /admin/user  |PUT</br>
+            userManager:btn_del  |  button  删除 | /admin/user  |DELETE</br>
+            userManager:view     |  uri     查看 | /admin/user  |GET</br>  
       </el-form-item>
 
       <el-form-item label="资源编码" prop="code">
@@ -136,9 +136,9 @@ export default {
           trigger: 'blur'
         },
         {
-          min: 3,
+          min: 2,
           max: 20,
-          message: '长度在 3 到 20 个字符',
+          message: '长度在 2 到 20 个字符',
           trigger: 'blur'
         }
         ],
@@ -160,9 +160,9 @@ export default {
           trigger: 'blur'
         },
         {
-          min: 3,
+          min: 2,
           max: 20,
-          message: '长度在 3 到 20 个字符',
+          message: '长度在 2 到 20 个字符',
           trigger: 'blur'
         }
         ],
@@ -172,9 +172,9 @@ export default {
           trigger: 'blur'
         },
         {
-          min: 3,
+          min: 2,
           max: 20,
-          message: '长度在 3 到 20 个字符',
+          message: '长度在 2 到 20 个字符',
           trigger: 'blur'
         }
         ],
@@ -184,9 +184,9 @@ export default {
           trigger: 'blur'
         },
         {
-          min: 3,
+          min: 2,
           max: 20,
-          message: '长度在 3 到 20 个字符',
+          message: '长度在 2 到 20 个字符',
           trigger: 'blur'
         }
         ],
@@ -196,9 +196,9 @@ export default {
           trigger: 'blur'
         },
         {
-          min: 3,
+          min: 2,
           max: 20,
-          message: '长度在 3 到 20 个字符',
+          message: '长度在 2 到 20 个字符',
           trigger: 'blur'
         }
         ]

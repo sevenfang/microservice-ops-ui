@@ -230,7 +230,8 @@ export default {
         orderNum: undefined,
         description: undefined,
         path: undefined,
-        enabled: undefined
+        enabled: undefined,
+        type:undefined
       };
     }
   }

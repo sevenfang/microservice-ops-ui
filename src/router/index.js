@@ -121,19 +121,19 @@ export const constantRouterMap = [{
   }]
 },
 {
-  path: '/tasklist',
+  path: '/task/tasklist',
   component: Layout,
   redirect: '/task/index',
   icon: 'form',
   noDropdown: true,
   children: [{
-    path: 'index',
+    path: '',
     component: _import('task/index'),
     name: '计划任务'
   }]
 },
 {
-  path: '/tasklist/tasklog',
+  path: '/task/tasklog',
   component: Layout,
   redirect: '/task/tasklog',
   icon: 'form',
@@ -232,44 +232,39 @@ export const asyncRouterMap = [
     name: '操作日志管理',
     authority: 'gateLogManager'
   }]
+},{
+  path: '/message',
+  component: Layout,
+  name: '基础配置管理',
+  icon: 'setting',
+  authority: 'mq',
+  children: [{
+    path: '/',
+    icon: 'fa-user',
+    component: _import('message/index'),
+    name: '消息中心',
+    authority: 'mq'
+  }]
+},
+,{
+  path: '/task',
+  component: Layout,
+  name: '基础配置管理',
+  icon: 'setting',
+  authority: 'task',
+  children: [{
+    path: '/',
+    icon: 'fa-user',
+    component: _import('task/index'),
+    name: '任务管理',
+    authority: 'task'
+  },
+  {
+    path: '/',
+    icon: 'fa-user',
+    component: _import('task/tasklog'),
+    name: '任务追踪',
+    authority: 'tasklog'
+  }]
 }
-// ,
-// {
-//   path: '/baseManager',
-//   component: Layout,
-//   name: '基础配置管理',
-//   icon: 'setting',
-//   authority: 'baseManager',
-//   children: [{
-//     path: 'userManager',
-//     icon: 'fa-user',
-//     component: _import('admin/user/index'),
-//     name: '用户管理',
-//     authority: 'userManager'
-//   }, {
-//     path: 'menuManager',
-//     icon: 'category',
-//     component: _import('admin/menu/index'),
-//     name: '菜单管理',
-//     authority: 'menuManager'
-//   }, {
-//     path: 'groupManager',
-//     icon: 'group_fill',
-//     component: _import('admin/group/index'),
-//     name: '角色权限管理',
-//     authority: 'groupManager'
-//   }, {
-//     path: 'groupTypeManager',
-//     icon: 'fa-users',
-//     component: _import('admin/groupType/index'),
-//     name: '角色类型管理',
-//     authority: 'groupTypeManager'
-//   }, {
-//     path: 'gateLogManager',
-//     icon: 'viewlist',
-//     component: _import('admin/gateLog/index'),
-//     name: '操作日志管理',
-//     authority: 'gateLogManager'
-//   }]
-// }
 ]

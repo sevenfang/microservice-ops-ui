@@ -3,7 +3,7 @@
    <div class="filter-container">
     <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="任务名" v-model="listQuery.jobName"> </el-input>
     <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
-    <el-button class="filter-item" v-if="groupTypeManager_btn_add" style="margin-left: 10px;" @click="handleCreate" type="primary" icon="edit">添加</el-button>
+    <el-button class="filter-item" v-if="task_btn_add" style="margin-left: 10px;" @click="handleCreate" type="primary" icon="edit">添加</el-button>
   </div>  
   
 <el-table :key='tableKey' :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%">
@@ -137,7 +137,7 @@ export default {
       dialogStatus: "",
       groupTypeManager_btn_edit: false,
       groupTypeManager_btn_del: false,
-      groupTypeManager_btn_add: false,
+      task_btn_add: false,
       textMap: {
         update: "编辑",
         create: "创建"
@@ -149,7 +149,7 @@ export default {
     this.getList();
     this.groupTypeManager_btn_edit = this.elements["groupTypeManager:btn_edit"];
     this.groupTypeManager_btn_del = this.elements["groupTypeManager:btn_del"];
-    this.groupTypeManager_btn_add = this.elements["groupTypeManager:btn_add"];
+    this.task_btn_add = this.elements["tasklist:btn_add"];
   },
   computed: {
     //获取state里面的listName对象
