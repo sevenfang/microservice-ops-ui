@@ -70,7 +70,7 @@
     </el-form>
      </el-card>
     <el-card class="box-card">
-        <span>按钮或资源</span>
+        <span>受控按钮或资源</span>
       <menu-element :menuId='currentId' ref="menuElement"></menu-element>
     </el-card>
   </el-col>
