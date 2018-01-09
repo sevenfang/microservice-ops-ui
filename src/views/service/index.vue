@@ -88,7 +88,7 @@ export default {
           label: 'never'
         }],
       refreshVal: 0,
-      timer: null
+      timer: 0
     };
   },
   created() {
@@ -96,15 +96,15 @@ export default {
   },
   methods: {
     refresh(intervalTime) {
-      console.log("refresh");
+      clearInterval(this.timer);
       if(intervalTime != 0){
         var self = this;
+        console.log("start interval");
         this.timer = setInterval(function(){ 
           self.getServiceInfo();
-        },intervalTime)
+        },intervalTime);
       } else {
-        console.log("clearInterval");
-        clearInterval(this.timer);
+        console.log("stop interval");
       }
     },
     getServiceInfo() {
