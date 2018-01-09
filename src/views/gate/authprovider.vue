@@ -63,11 +63,13 @@
         </el-form-item>
         <el-form-item label="服务" prop="authService">
           <el-input v-model="form.authService" placeholder="请输入服务"></el-input>
-        </el-form-item>
-        
+        </el-form-item> 
          <el-form-item label="执行接受方式" prop="acceptType">
-          <el-input v-model="form.acceptType" placeholder="请输入接受方式"></el-input>
-        </el-form-item>  
+          <el-select v-model="form.acceptType" placeholder="执行接受方式">
+            <el-option label="user" value="user"></el-option>
+            <el-option label="userAndPassword" value="userAndPassword"></el-option>
+          </el-select>
+        </el-form-item> 
       
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -242,11 +244,9 @@ export default {
     },
     resetTemp() {
       this.form = {
-        path: undefined,
-        serviceId: undefined,
-        url: undefined,
-        stripPrefix: undefined,
-        retryable: undefined
+        srcUrl: undefined,
+        authService: undefined,
+        acceptType: undefined, 
       };
     }
   }

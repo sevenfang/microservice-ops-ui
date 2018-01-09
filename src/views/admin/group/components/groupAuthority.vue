@@ -10,23 +10,24 @@
   </el-col>
   <el-col :span="16" style='margin-top:15px;'>
     <el-table ref="elementTable" :data="list" border fit highlight-current-row @select="handleSelectionChange" style="width: 100%">
-      <el-table-column v-if="groupManager_element" type="selection" width="55"> </el-table-column>
+      <el-table-column v-if="groupManager_element" type="selection" width="55" > </el-table-column>
+     
       <el-table-column width="200px" align="center" label="资源编码">
-      <template scope="scope"> <span>{{scope.row.code}}</span> </template>
+        <template scope="scope"> <span>{{scope.row.code}}</span> </template> 
+      </el-table-column>
 
-</el-table-column>
-    <el-table-column width="200px" align="center" label="资源类型"><template scope="scope">
-    <span>
-        {{scope.row.type}}</span>
-</template>
-
-</el-table-column>
-    <el-table-column width="200px" align="center" label="资源名称"><template scope="scope">
-    <span>
-        {{scope.row.name}}</span>
-</template>
-
-</el-table-column>
+      <el-table-column width="200px" align="center" label="资源类型">
+          <template scope="scope">
+            <span>{{scope.row.type}}</span>
+          </template>
+      </el-table-column>
+    
+    <el-table-column width="200px" align="center" label="资源名称">
+      <template scope="scope">
+        <span>{{scope.row.name}}</span>
+    </template>
+  </el-table-column>
+  
     <el-table-column width="200px" align="center" label="资源地址"><template scope="scope">
     <span>
         {{scope.row.uri}}</span>
@@ -135,6 +136,7 @@ export default {
       return node.id;
     },
     handleSelectionChange(val, row) {
+      alert(val+row)
       let flag = true;
       for (let i = 0; i < val.length; i++) {
         if (val[i].id === row.id) {

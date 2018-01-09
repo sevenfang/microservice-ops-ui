@@ -327,11 +327,11 @@ export default {
     },
     resetTemp() {
       this.form = {
-        path: undefined,
-        serviceId: undefined,
-        url: undefined,
-        stripPrefix: undefined,
-        retryable: undefined
+        name: undefined,
+        type: undefined,
+        serviceName: undefined,
+        script: undefined,
+        path: undefined, 
       };
     }
   }

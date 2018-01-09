@@ -59,14 +59,20 @@
   </el-table>
   <div v-show="!listLoading" class="pagination-container">
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
-  </div>
+  </div> 
   <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
     <el-form :model="form" :rules="rules" ref="form" label-width="100px">
+
+      <el-form-item label="规则" style="color: red;">
+      资源编码=当前资源编码：btn_</br>
+            userManager:btn_add    button 新增</br>
+            userManager:btn_edit   button 编辑</br>
+            userManager:btn_del    button  删除</br>
+            userManager:view       uri     查看</br>
+      </el-form-item>
+
       <el-form-item label="资源编码" prop="code">
         <el-input v-model="form.code" placeholder="请输入资源编码"></el-input>
-        <span style="color: red;"> 路径编码+按钮id{btn_add(新增),btn_edit(编辑),btn_del(删除
-),view(查看)}</span>
-        <span style="color: red;">如：userManager:btn_add</span> 
       </el-form-item>
       <el-form-item label="资源类型" prop="type">
          <el-select class="filter-item" v-model="form.type" placeholder="请输入资源类型">
@@ -329,12 +335,12 @@ export default {
       });
     },
     resetTemp() {
-      this.form = {
-        username: undefined,
-        name: undefined,
-        sex: '男',
-        password: undefined,
-        description: undefined
+      this.form = { 
+        code:undefined,
+        type:undefined,
+        name:undefined,
+        uri:undefined,
+        method:undefined,
       };
     }
   }
