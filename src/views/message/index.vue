@@ -131,8 +131,9 @@
         <el-input type="textarea" v-model="showScriptdata" placeholder="message"  :autosize="{ minRows: 5}"></el-input>
       </el-form-item> 
     </el-form>
- 
+
     <div slot="footer" class="dialog-footer">
+      <el-button  type="success"    @click="formatScript()">格式化</el-button> 
       <el-button  type="success"    @click="dialogForScript = false">关闭</el-button> 
     </div>
   </el-dialog>
@@ -220,7 +221,11 @@ export default {
   methods: {
     showScript(message) {
       this.dialogForScript = true;
-      this.showScriptdata = this.formatJson(message);
+      this.showScriptdata = message;
+    },
+
+    formatScript() {
+      this.showScriptdata = this.formatJson(this.showScriptdata);
     },
 
     indexMethod(index) {
