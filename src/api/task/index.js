@@ -1,14 +1,14 @@
 import fetch from 'utils/fetch';
 export function addObj(obj) {
   return fetch({
-    url: '/api/task/taskManager/save.json',
+    url: '/api/task/taskManager/save',
     method: 'post',
     data: obj
   });
 }
 export function getTasklist(query) {
   return fetch({
-    url: '/api/task/taskManager/list.json',
+    url: '/api/task/taskManager/list',
     method: 'get',
     params: query
   });
