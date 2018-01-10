@@ -56,11 +56,18 @@ service.interceptors.response.use(
     }
     if (response.status !== 200 && res.status !== 200) {
       Message({
-        message: res.message,
+        message: res.errMsg,
         type: 'error',
         duration: 5 * 1000
       });
     } else {
+        if(res.errMsg!=null){
+          Message({
+            message: res.errMsg,
+            type: 'error',
+            duration: 5 * 1000
+          });
+        }
       return response.data;
     }
   },
