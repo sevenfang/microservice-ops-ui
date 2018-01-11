@@ -1,41 +1,86 @@
  <template>
 <div class="app-container calendar-list-container">
   <div class="filter-container">
-    <span class="demonstration">msgKey</span>
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="msgKey" v-model="listQuery.msgKey"> </el-input>
-    <span class="demonstration">交换机名称</span>
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="交换机名称" v-model="listQuery.exchangeName"> </el-input>
-    <span class="demonstration">发送者应用</span>
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="发送者应用" v-model="listQuery.sender"> </el-input>
-    <div class="block">
-      <span class="demonstration">发送者IP</span>
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="发送者IP" v-model="listQuery.host"> </el-input>
-      <span class="demonstration">发送开始时间</span>
-      <el-date-picker
-        v-model="listQuery.occurStartTime"
-        type="datetime"
-        placeholder="选择日期时间"
-        align="right"
-        :picker-options="pickerOptions1"
-        @change="getOccurStartTimeStamp">
-      </el-date-picker>
-      <span class="demonstration">发送结束时间</span>
-      <el-date-picker
-        v-model="listQuery.occurEndTime"
-        type="datetime"
-        placeholder="选择日期时间"
-        align="right"
-        :picker-options="pickerOptions1"
-        @change="getOccurEndTimeStamp">
-      </el-date-picker>
-    </div>
-    <span class="demonstration">发送状态</span>
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="发送状态" v-model="listQuery.produceStatus"> </el-input>
-    <span class="demonstration">消费状态</span>
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="消费状态" v-model="listQuery.consumeStatus"> </el-input>
-    <span class="demonstration">内容</span>
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="内容" v-model="listQuery.data"> </el-input>
-    <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
+    <el-row :gutter="20">
+      <div>
+      <el-col :span="6">
+            <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="msgKey" v-model="listQuery.msgKey"> </el-input>
+      </el-col>
+      </div>
+      <el-col :span="6">
+            <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="交换机名称" v-model="listQuery.exchangeName"> </el-input>
+      </el-col>
+      <el-col :span="6">
+            <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="发送者应用" v-model="listQuery.sender"> </el-input>
+      </el-col>
+      <el-col :span="6">
+          <el-date-picker
+            v-model="listQuery.occurStartTime"
+            type="datetime"
+            placeholder="选择开始时间"
+            align="right"
+            :picker-options="pickerOptions1"
+            @change="getOccurStartTimeStamp">
+          </el-date-picker>   
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :span="6">
+            <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="发送者IP" v-model="listQuery.host"> </el-input>
+      </el-col>
+      <el-col :span="6">
+          <el-select v-model="listQuery.consumeStatus" placeholder="消费状态" clearable>
+            <el-option
+              v-for="item in cOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+      </el-col>
+      <el-col :span="6">
+        <div>
+          <el-select v-model="listQuery.produceStatus" placeholder="发送状态" clearable>
+            <el-option
+              v-for="item in pOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      </el-col>
+      <el-col :span="6">
+          <el-date-picker
+            v-model="listQuery.occurEndTime"
+            type="datetime"
+            placeholder="选择结束时间"
+            align="right"
+            :picker-options="pickerOptions1"
+            @change="getOccurEndTimeStamp">
+          </el-date-picker>
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="20">
+      <el-col :span="6">
+          <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="内容" v-model="listQuery.data"> </el-input>
+      </el-col>
+    
+      <el-col :span="6">
+          <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
+      </el-col>
+    </el-row>
+    <!-- <span class="demonstration">msgKey</span> -->
+    <!-- <span class="demonstration">交换机名称</span> -->
+    <!-- <span class="demonstration">发送者应用</span> -->
+
+    <!-- <span class="demonstration">发送者IP</span> -->
+    <!-- <span class="demonstration">发送开始时间</span> -->
+
+    <!-- <span class="demonstration">发送结束时间</span> -->
+
+    <!-- <span class="demonstration">内容</span> -->
   </div>
   
 <el-table :key='tableKey' :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%" height="460">
@@ -167,6 +212,20 @@ export default {
         version: undefined,
         script: undefined
       },
+      pOptions: [{
+        value: 'PRODUCED',
+        label: '已生成'
+      }, {
+        value: 'PRODUCE_FAIL',
+        label: '生成失败'
+      }],
+      cOptions: [{
+        value: 'CONSUMED',
+        label: '已消费'
+      }, {
+        value: 'CONSUME_FAIL',
+        label: '消费失败'
+      }],
       list: null,
       total: null,
       listLoading: true,
