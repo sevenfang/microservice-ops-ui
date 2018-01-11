@@ -76,7 +76,7 @@
 </el-table> 
   <!-- 分页 -->
   <div v-show="!listLoading" class="pagination-container">
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.pages" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="pages"> </el-pagination>
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.pages" :page-sizes="[10,20,30, 50]" :page-size="listQuery.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="pages"> </el-pagination>
   </div>
 </div>
 </template>
@@ -139,7 +139,7 @@ export default {
       this.listLoading = true;
       page(this.listQuery).then(response => { 
         this.list=response.page.list;
-        this.pages = response.page.pages;
+        this.pages = response.page.itemsTotal;
         this.listLoading = false;
       });
     },

@@ -137,7 +137,7 @@ export default {
       dialogStatus: "",
       groupTypeManager_btn_edit: false,
       groupTypeManager_btn_del: false,
-      task_btn_add: false,
+      task_btn_add: true,
       textMap: {
         update: "编辑",
         create: "创建"

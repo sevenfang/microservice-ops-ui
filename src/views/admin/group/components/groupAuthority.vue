@@ -9,7 +9,8 @@
     </el-tree>
   </el-col>
   <el-col :span="16" style='margin-top:15px;'>
-    <el-table ref="elementTable" :data="list" border fit highlight-current-row @select="handleSelectionChange" style="width: 100%">
+    <span style="color:red">注：请逐个选择需要授权的按钮资源，不要点击全选按钮，全选按钮无效</span>
+    <el-table ref="elementTable" :data="list"  @select="handleSelectionChange" style="width: 100%">
       <el-table-column v-if="groupManager_element" type="selection" width="55" > </el-table-column>
      
       <el-table-column width="200px" align="center" label="资源编码">
@@ -136,7 +137,7 @@ export default {
       return node.id;
     },
     handleSelectionChange(val, row) {
-      alert(val+row)
+      // alert(val+row)
       let flag = true;
       for (let i = 0; i < val.length; i++) {
         if (val[i].id === row.id) {
