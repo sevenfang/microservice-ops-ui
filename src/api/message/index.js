@@ -21,3 +21,10 @@ export function getConsumedInfoList(id) {
         method: 'get'
     })
 }
+
+export function resendMessage(msgKey, type) {
+    return fetch({
+        url: '/api/message/mq/resendMessage/' + msgKey + '/' + type,
+        method: 'post'
+    })
+}

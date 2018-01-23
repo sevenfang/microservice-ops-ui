@@ -159,7 +159,7 @@
     <el-table-column width="200px" align="center" label="操作">
         <template scope="scope">
             <el-button size="small" type="info"  @click="showDetail(scope.row)">消费详情</el-button>
-            <el-button size="small" type="info"  @click="showScript(scope.row.data)">重发</el-button>
+            <el-button size="small" type="info"  @click="resendMsg(scope.row.msgKey)">重发</el-button>
         </template>
     </el-table-column> 
 </el-table>
@@ -192,7 +192,8 @@
  <script>
 import {
   getMessageList,
-  getMessage
+  getMessage,
+  resendMessage
 } from "api/message/index";
 import { mapGetters } from "vuex";
 export default {
@@ -281,6 +282,27 @@ export default {
     showScript(message) {
       this.dialogForScript = true;
       this.showScriptdata = message;
+    },
+
+    resendMsg(msgKey) {
+      resendMessage(msgKey, "producer").then(response => {
+              console.log(response);
+              if(response.success){
+                this.$notify({
+                  title: '成功',
+                  message: '重发成功',
+                  type: 'success',
+                  duration: 2000
+                });
+              }else{
+                this.$notify({
+                  title: '失败',
+                  message: '重发失败',
+                  type: 'error',
+                  duration: 2000
+                });
+              }
+            });
     },
 
     formatScript() {
