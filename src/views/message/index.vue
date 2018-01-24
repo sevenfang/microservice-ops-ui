@@ -159,7 +159,7 @@
     <el-table-column width="200px" align="center" label="操作">
         <template scope="scope">
             <el-button size="small" type="info"  @click="showDetail(scope.row)">消费详情</el-button>
-            <el-button size="small" type="info"  @click="resendMsg(scope.row.msgKey)">重发</el-button>
+            <el-button size="small" type="info"  @click="showResendUrl(scope.row)">重发</el-button>
         </template>
     </el-table-column> 
 </el-table>
@@ -183,6 +183,20 @@
     </div>
   </el-dialog>
 
+  <!-- 重发模态框 -->
+  <el-dialog  title="重发"  :visible.sync="dialogForResend">
+    <el-form>
+      <el-form-item label="请确认重发服务地址是否正确">
+        <el-input v-model="resendServiceUrl" auto-complete="off"></el-input>
+      </el-form-item>
+    </el-form>
+
+    <div slot="footer" class="dialog-footer">
+      <el-button  type="success"    @click="resendMsg()">确认</el-button> 
+      <el-button  type="success"    @click="dialogForResend = false">关闭</el-button> 
+    </div>
+  </el-dialog>
+
   <el-dialog :title="dialogDetailName" size="large" :visible.sync="dialogDetailVisible">
       <message-detail :msgKey="msgKey"  @closeMessageDetailDialog="closeMessageDetailDialog" ref="messageDetail"></message-detail>
   </el-dialog>
@@ -193,7 +207,7 @@
 import {
   getMessageList,
   getMessage,
-  resendMessage
+  resendMessageByserviceUrl
 } from "api/message/index";
 import { mapGetters } from "vuex";
 export default {
@@ -250,6 +264,9 @@ export default {
       },
       dialogForScript: false,
       showScriptdata: undefined,
+      dialogForResend: false,
+      resendServiceUrl: undefined, 
+      resendMsgKey: undefined,
       tableKey: 1,
       pickerOptions1: {
           shortcuts: [{
@@ -284,8 +301,14 @@ export default {
       this.showScriptdata = message;
     },
 
-    resendMsg(msgKey) {
-      resendMessage(msgKey, "producer").then(response => {
+    showResendUrl(row) {
+      this.dialogForResend = true;
+      this.resendServiceUrl = row.serviceUrl;
+      this.resendMsgKey = row.msgKey;
+    },
+
+    resendMsg() {
+      resendMessageByserviceUrl(this.resendMsgKey, "producer", this.resendServiceUrl).then(response => {
               console.log(response);
               if(response.success){
                 this.$notify({
@@ -303,6 +326,7 @@ export default {
                 });
               }
             });
+      this.dialogForResend = false;
     },
 
     formatScript() {

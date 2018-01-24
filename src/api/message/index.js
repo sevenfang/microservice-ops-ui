@@ -28,3 +28,10 @@ export function resendMessage(msgKey, type) {
         method: 'post'
     })
 }
+
+export function resendMessageByserviceUrl(msgKey, type, serviceUrl) {
+    return fetch({
+        url: '/api/message/mq/resendMessage/' + msgKey + '/' + type + '?serviceUrl=' + serviceUrl,
+        method: 'post'
+    })
+}
