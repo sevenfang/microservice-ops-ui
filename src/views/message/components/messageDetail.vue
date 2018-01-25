@@ -55,7 +55,7 @@
 
 <el-table-column width="200px" align="center" label="操作">
         <template scope="scope">
-            <el-button size="small" type="info"  @click="resendMsg(scope.row.msgKey, scope.row.serviceUrl)">重发</el-button>
+            <el-button size="small" type="info"  @click="resendMsg(scope.row.msgKey, scope.row.serviceUrl)">重消费</el-button>
         </template>
     </el-table-column> 
 
