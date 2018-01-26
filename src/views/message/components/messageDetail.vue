@@ -55,7 +55,7 @@
 
 <el-table-column width="200px" align="center" label="操作">
         <template scope="scope">
-            <el-button size="small" type="info"  @click="resendMsg(scope.row.msgKey, scope.row.serviceUrl)">重消费</el-button>
+            <el-button size="small" type="info"  @click="showResendUrl(scope.row)">重消费</el-button>
         </template>
     </el-table-column> 
 
@@ -63,6 +63,21 @@
         <!-- <div v-show="!listLoading" class="pagination-container">
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
         </div> -->
+
+  <!-- 重发模态框 -->
+  <el-dialog  title="重消费"  :visible.sync="dialogForReconsume">
+    <el-form>
+      <el-form-item label="请确认重发服务地址是否正确">
+        <el-input v-model="reconsumeServiceUrl" auto-complete="off"></el-input>
+      </el-form-item>
+    </el-form>
+
+    <div slot="footer" class="dialog-footer">
+      <el-button  type="success"    @click="reconsume()">确认</el-button> 
+      <el-button  type="success"    @click="dialogForReconsume = false">关闭</el-button> 
+    </div>
+  </el-dialog>
+
     </div>
 </template>
 
@@ -79,7 +94,10 @@ export default {
     return {
       list: null,
       listLoading: true,
-      tableKey: 0
+      tableKey: 0,
+      dialogForReconsume: false,
+      reconsumeServiceUrl: undefined, 
+      reconsumeMsgKey: undefined
     };
   },
   created() {
@@ -95,8 +113,14 @@ export default {
       });
     },
 
-    resendMsg(msgKey, serviceUrl) {
-      resendMessageByserviceUrl(msgKey, "consumer", serviceUrl).then(response => {
+    showResendUrl(row) {
+      this.dialogForReconsume = true;
+      this.reconsumeServiceUrl = row.serviceUrl;
+      this.reconsumeMsgKey = row.msgKey;
+    },
+
+    reconsume() {
+      resendMessageByserviceUrl(this.reconsumeMsgKey, "consumer", this.reconsumeServiceUrl).then(response => {
               console.log(response);
               if(response.success){
                 this.$notify({
@@ -114,6 +138,7 @@ export default {
                 });
               }
             });
+      this.dialogForReconsume = false;
     },
 
     getLocalTime(ms) {

@@ -166,7 +166,7 @@
 
   <!-- 分页 -->
   <div v-show="!listLoading" class="pagination-container">
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page" :page-sizes="[5, 10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
   </div>
 
     <!-- 详情模态框 -->
@@ -229,10 +229,10 @@ export default {
       },
       pOptions: [{
         value: 'PRODUCED',
-        label: '已生成'
+        label: '已发送'
       }, {
         value: 'PRODUCE_FAIL',
-        label: '生成失败'
+        label: '发送失败'
       }],
       cOptions: [{
         value: 'CONSUMED',
