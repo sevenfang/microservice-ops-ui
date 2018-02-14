@@ -3,7 +3,7 @@ FROM 172.16.199.203/node:9
 
 WORKDIR /project
 
-COPY package*.json 
+COPY package*.json /project/
 
 RUN npm install --registry=https://registry.npm.taobao.org
 
