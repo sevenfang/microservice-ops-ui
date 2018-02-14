@@ -1,0 +1,13 @@
+# use node 9.5
+FROM 172.16.199.203/node:9
+
+WORKDIR /project
+
+COPY package*.json 
+
+RUN npm install --registry=https://registry.npm.taobao.org
+
+COPY . /project/
+
+RUN npm run build:prod && tar -zcvf /project/dist.tar.gz /project/dist
+
