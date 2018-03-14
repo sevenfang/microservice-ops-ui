@@ -75,7 +75,7 @@
         <el-input v-model="form.jobName" placeholder="请输入任务名"></el-input>
       </el-form-item> 
       <el-form-item label="任务类型" prop="executeType">  
-            <el-input v-model="form.executeType" placeholder="请输入任务名" value="executeUrl" :disabled="true"></el-input>
+            <el-input v-model="form.executeType"  value="executeUrl" :disabled="true"></el-input>
         </el-form-item> 
       <el-form-item label="cron表达式" prop="cronExpression">
         <el-input v-model="form.cronExpression" placeholder="请输入cron表达式"></el-input>

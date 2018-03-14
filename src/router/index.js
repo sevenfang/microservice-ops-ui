@@ -180,7 +180,20 @@ export const constantRouterMap = [{
     component: _import('hyperlink/common/index'),
     name: 'pinpoint'
   }]
-}
+},
+{
+  path: '/alarm',
+  component: Layout,
+  redirect: '/alarm',
+  icon: 'form',
+  noDropdown: true,
+  children: [
+    {path: 'rulelist', component: _import('alarm/rule-group-list') ,name: '报警规则' },
+    {path: 'alarmLogs', component: _import('alarm/alarmLogs') ,name: '报警记录' },
+    {name:'addrule',path: 'add', component: _import('alarm/rule-add') ,name: '创建报警规则' },
+    {path: 'groupManager', component: _import('admin/group/index') ,name: '报警组管理' }
+]
+},
 ]
 
 export default new Router({
