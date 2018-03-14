@@ -54,6 +54,12 @@
           <el-option v-for="item in  sexOptions" :key="item" :label="item" :value="item"> </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="电话" prop="telPhone">
+        <el-input v-model="form.telPhone" placeholder="请输入电话"></el-input>
+      </el-form-item>
+      <el-form-item label="邮箱" prop="email">
+        <el-input v-model="form.email" placeholder="请输入邮箱"></el-input>
+      </el-form-item>
       <el-form-item label="描述">
         <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 5}" placeholder="请输入内容" v-model="form.description"> </el-input>
       </el-form-item>
@@ -68,64 +74,77 @@
 </template>
 
 <script>
-import {
-  page,
-  addObj,
-  getObj,
-  delObj,
-  putObj
-} from 'api/admin/user/index';//..导入方法
-import { mapGetters } from 'vuex';
+import { page, addObj, getObj, delObj, putObj } from "api/admin/user/index"; //..导入方法
+import { mapGetters } from "vuex";
 export default {
-  name: 'user',
+  name: "user",
   data() {
     return {
       form: {
         username: undefined,
         name: undefined,
-        sex: '男',
+        sex: "男",
         password: undefined,
+        email:undefined, 
+        telPhone:undefined,
         description: undefined
       },
       rules: {
         name: [
           {
             required: true,
-            message: '请输入用户',
-            trigger: 'blur'
+            message: "请输入用户",
+            trigger: "blur"
           },
           {
             min: 3,
             max: 20,
-            message: '长度在 3 到 20 个字符',
-            trigger: 'blur'
+            message: "长度在 3 到 20 个字符",
+            trigger: "blur"
           }
         ],
         username: [
           {
             required: true,
-            message: '请输入账户',
-            trigger: 'blur'
+            message: "请输入账户",
+            trigger: "blur"
           },
           {
             min: 3,
             max: 20,
-            message: '长度在 3 到 20 个字符',
-            trigger: 'blur'
+            message: "长度在 3 到 20 个字符",
+            trigger: "blur"
           }
         ],
         password: [
           {
             required: true,
-            message: '请输入密码',
-            trigger: 'blur'
+            message: "请输入密码",
+            trigger: "blur"
           },
           {
             min: 5,
             max: 20,
-            message: '长度在 5 到 20 个字符',
-            trigger: 'blur'
+            message: "长度在 5 到 20 个字符",
+            trigger: "blur"
           }
+        ],
+        telPhone:[
+          { 
+            required: true,
+            message: '请输入手机号码',
+            trigger: 'blur'
+          }, {validator:function(rule,value,callback){
+            if(/^1[34578]\d{9}$/.test(value) == false){
+                callback(new Error("请输入正确的手机号"));
+            }else{
+                callback();
+            }
+        }, trigger: 'blur'}
+        ]
+        ,
+         email:[
+            { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change'  }
         ]
       },
       list: null,
@@ -136,39 +155,36 @@ export default {
         limit: 20,
         name: undefined
       },
-      sexOptions: ['男', '女'],
+      sexOptions: ["男", "女"],
       dialogFormVisible: false,
-      dialogStatus: '',
+      dialogStatus: "",
       userManager_btn_edit: false,
       userManager_btn_del: false,
       userManager_btn_add: true,
       textMap: {
-        update: '编辑',
-        create: '创建'
+        update: "编辑",
+        create: "创建"
       },
       tableKey: 0
-    }
+    };
   },
   created() {
     this.getList();
-    this.userManager_btn_edit = this.elements['userManager:btn_edit'];
-    this.userManager_btn_del = this.elements['userManager:btn_del'];
-    this.userManager_btn_add = this.elements['userManager:btn_add'];
+    this.userManager_btn_edit = this.elements["userManager:btn_edit"];
+    this.userManager_btn_del = this.elements["userManager:btn_del"];
+    this.userManager_btn_add = this.elements["userManager:btn_add"];
   },
   computed: {
-    ...mapGetters([
-      'elements'
-    ])
+    ...mapGetters(["elements"])
   },
   methods: {
     getList() {
       this.listLoading = true;
-      page(this.listQuery)
-        .then(response => {
-          this.list = response.data.rows;
-          this.total = response.data.total;
-          this.listLoading = false;
-        })
+      page(this.listQuery).then(response => {
+        this.list = response.data.rows;
+        this.total = response.data.total;
+        this.listLoading = false;
+      });
     },
     handleFilter() {
       this.getList();
@@ -183,53 +199,49 @@ export default {
     },
     handleCreate() {
       this.resetTemp();
-      this.dialogStatus = 'create';
+      this.dialogStatus = "create";
       this.dialogFormVisible = true;
     },
     handleUpdate(row) {
-      getObj(row.id)
-        .then(response => {
-          // 这里是处理正确的回调
-          this.form = response.data;
-          this.dialogFormVisible = true;
-          this.dialogStatus = 'update';
-        });
+      getObj(row.id).then(response => {
+        // 这里是处理正确的回调
+        this.form = response.data;
+        this.dialogFormVisible = true;
+        this.dialogStatus = "update";
+      });
     },
     handleDelete(row) {
-      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
-          delObj(row.id)
-            .then(() => {
-              this.$notify({
-                title: '成功',
-                message: '删除成功',
-                type: 'success',
-                duration: 2000
-              });
-              const index = this.list.indexOf(row);
-              this.list.splice(index, 1);
-            });
+      this.$confirm("此操作将永久删除, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        delObj(row.id).then(() => {
+          this.$notify({
+            title: "成功",
+            message: "删除成功",
+            type: "success",
+            duration: 2000
+          });
+          const index = this.list.indexOf(row);
+          this.list.splice(index, 1);
         });
+      });
     },
     create(formName) {
       const set = this.$refs;
       set[formName].validate(valid => {
         if (valid) {
-          addObj(this.form)
-            .then(() => {
-              this.dialogFormVisible = false;
-              this.getList();
-              this.$notify({
-                title: '成功',
-                message: '创建成功',
-                type: 'success',
-                duration: 2000
-              });
-            })
+          addObj(this.form).then(() => {
+            this.dialogFormVisible = false;
+            this.getList();
+            this.$notify({
+              title: "成功",
+              message: "创建成功",
+              type: "success",
+              duration: 2000
+            });
+          });
         } else {
           return false;
         }
@@ -249,9 +261,9 @@ export default {
             this.dialogFormVisible = false;
             this.getList();
             this.$notify({
-              title: '成功',
-              message: '修改成功',
-              type: 'success',
+              title: "成功",
+              message: "修改成功",
+              type: "success",
               duration: 2000
             });
           });
@@ -264,11 +276,11 @@ export default {
       this.form = {
         username: undefined,
         name: undefined,
-        sex: '男',
+        sex: "男",
         password: undefined,
         description: undefined
       };
     }
   }
-}
+};
 </script>
