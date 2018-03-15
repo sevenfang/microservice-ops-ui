@@ -2,13 +2,12 @@
 <div class="app-container calendar-list-container">
   <div class="filter-container">
     <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="规则组名称" v-model="listQuery.groupName"> </el-input>
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="状态" v-model="listQuery.status"> </el-input>
-
-        <el-radio-group v-model="form.status"  border=true size="medium">
-          <el-radio  label="Processing">开始处理</el-radio>
-          <el-radio  label="Complete">报警已解除</el-radio>
-        </el-radio-group>
-
+        <template >
+          <el-select v-model="listQuery.status" placeholder="请选择状态"  class="filter-item">
+            <el-option  v-for="item in statusMapselect" :key="item.value"  :label="item.label"  :value="item.value">
+            </el-option>
+          </el-select>
+        </template>
     <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button> 
   </div>
   
@@ -37,11 +36,23 @@
       </template>
     </el-table-column>
 
+    <!-- <el-table-column  align="center" label="报错信息">
+        <template scope="scope">
+            <span class="lengthtext"> {{scope.row.alertDetail}}</span>
+        </template>
+    </el-table-column>  -->
+
     <el-table-column  align="center" label="报错信息">
         <template scope="scope">
-            <span> {{scope.row.alertDetail}}</span>
+        <el-popover trigger="hover" placement="top">
+          <span>{{scope.row.alertDetail}}</span>
+          <div slot="reference" class="name-wrapper">
+           <span class="lengthtext"> {{scope.row.alertDetail}}</span>
+          </div>
+        </el-popover>
         </template>
     </el-table-column> 
+
 
   
       <el-table-column align="center" label="状态">
@@ -122,6 +133,7 @@ export default {
       total: null,
       listLoading: true,
       listQuery: {
+        status,
         page: 1,
         limit: 20,
         groupName: undefined
@@ -138,6 +150,12 @@ export default {
         create: "创建"
       },
        statusMap: {Trigger:"已触发",Notice:"已通知",Handle:"处理中",Finished:"已解除"},
+       statusMapselect:[ 
+        {value: 'Trigger', label: '已触发'},
+        {value: 'Notice', label: '已通知'},
+        {value: 'Handle', label: '处理中'},
+        {value: 'Finished', label: '已解除'} 
+       ], 
       tableKey: 1
     };
   },
@@ -224,3 +242,12 @@ export default {
   }
 };
 </script>
+<style>
+.lengthtext{
+    display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6; 
+  overflow: hidden;
+  }
+</style>
+
