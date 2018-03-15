@@ -110,7 +110,7 @@
               </el-table-column> 
                 <el-table-column  align="center" label="用户邮件">
                   <template scope="scope">
-                      <span>{{scope.row.telPhone}}</span> 
+                      <span>{{scope.row.email}}</span> 
                   </template> 
               </el-table-column> 
         

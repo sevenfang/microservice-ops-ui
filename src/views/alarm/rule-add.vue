@@ -66,12 +66,12 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="持续时间"> 
-              <el-input v-model="item.ruleTime" placeholder="持续时间"></el-input><span>分</span>
+              <el-input v-model="item.ruleTime" placeholder="持续时间分钟"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label="持续次数"> 
-              <el-input v-model="item.ruleCount" placeholder="持续次数"></el-input> <span>次</span>
+              <el-input v-model="item.ruleCount" placeholder="持续次数"></el-input>
             </el-form-item>
           </el-col>
           </el-row> 
