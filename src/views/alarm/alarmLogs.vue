@@ -1,6 +1,7 @@
  <template>
 <div class="app-container calendar-list-container">
   <div class="filter-container">
+    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="服务名称" v-model="listQuery.appName"> </el-input>
     <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="规则组名称" v-model="listQuery.groupName"> </el-input>
         <template >
           <el-select v-model="listQuery.status" placeholder="请选择状态"  class="filter-item">
@@ -27,6 +28,12 @@
     <el-table-column  align="center" label="规则组名称">
         <template scope="scope">
             <span>{{scope.row.groupName}}</span>
+        </template>
+    </el-table-column>
+
+    <el-table-column  align="center" label="服务名称">
+        <template scope="scope">
+            <span>{{scope.row.appName}}</span>
         </template>
     </el-table-column>
 
@@ -133,10 +140,11 @@ export default {
       total: null,
       listLoading: true,
       listQuery: {
-        status,
+        status:undefined,
         page: 1,
         limit: 20,
-        groupName: undefined
+        groupName: undefined,
+        appName:undefined
       },
       dialogForScript: false,
       showScriptdata: undefined,
