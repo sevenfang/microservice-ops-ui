@@ -176,10 +176,10 @@ export default {
           false:"已禁用"
         }, 
        statusOptions: [{
-          value: 'true',
+          value: 1,
           label: '启用'
         }, {
-          value: 'false',
+          value: 0,
           label: '禁用'
         }],
     };
