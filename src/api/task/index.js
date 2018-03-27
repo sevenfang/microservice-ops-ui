@@ -16,8 +16,12 @@ export function getTasklist(query) {
 
 export function delObj(jobName,jobGroup) {
   return fetch({
-    url: '/api/task/taskManager/delete/'+jobName+'/'+jobGroup, 
-    method: 'delete'
+    url: '/api/task/taskManager/delete', 
+    method: 'delete',
+    params: {
+      jobName:jobName,
+      jobGroup:jobGroup
+    }
   })
 }
 
