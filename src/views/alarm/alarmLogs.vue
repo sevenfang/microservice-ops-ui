@@ -39,7 +39,7 @@
 
       <el-table-column align="center" label="报警时间">
       <template scope="scope">
-          <span>{{scope.row.createDate}}</span>
+          <span>{{getLocalTimes(scope.row.createDate)}}</span>
       </template>
     </el-table-column>
 
@@ -121,6 +121,7 @@ import {
   putObj,
   getObj
 } from "api/alarm/alarmLogs";
+import {getLocalTime} from "../../utils/index";
 import { mapGetters } from "vuex";
 export default {
   name: "alarmLogs",
@@ -162,11 +163,12 @@ export default {
         {value: 'Trigger', label: '已触发'},
         {value: 'Notice', label: '已通知'},
         {value: 'Handle', label: '处理中'},
-        {value: 'Finished', label: '已解除'} 
+        {value: 'Finished', label: '已解除'},
+        {value: '', label: '全部状态'}, 
        ], 
       tableKey: 1
     };
-  },
+  }, 
   created() {
     this.getList();
     this.groupTypeManager_btn_edit = this.elements["groupTypeManager:btn_edit"];
@@ -177,7 +179,11 @@ export default {
     //获取state里面的listName对象
     ...mapGetters(["elements"])
   },
-  methods: { 
+  methods: {
+    
+  getLocalTimes(ms){
+    return getLocalTime(ms);
+  },
     indexMethod(index) {
       return index * 2;
     },
