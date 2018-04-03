@@ -37,7 +37,7 @@
           <el-form  label-width="100px">
                
               <el-form-item label="资源范围:" style="width: 800px;"> 
-                <el-select v-model="form.ipAppList"  multiple  filterable  allow-create  default-first-option placeholder="请选择活动范围" size="medium" style="width:360px">
+                <el-select v-model="form.ipAppList"  multiple  filterable  allow-create  default-first-option placeholder="请选择服务名或填写ip" size="medium" style="width:360px">
                   <el-option v-for="item in serviceList"  :key="item.id" :label="item.appName"   :value="item.appName"></el-option>  
                 </el-select>
               </el-form-item>
