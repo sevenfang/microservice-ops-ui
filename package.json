@@ -1,8 +1,8 @@
 {
-  "name": "juicy",
+  "name": "ui",
   "version": "1.2.0",
-  "description": "A Vue.js admin",
-  "author": "Pan <panfree23@gmail.com>",
+  "description": "A Vue.js ui",
+  "author": "Daniell <huyle@yonyou.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
