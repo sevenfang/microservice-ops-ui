@@ -1,15 +1,26 @@
  <template>
 <div class="app-container calendar-list-container">
   <div class="filter-container">
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="服务名称" v-model="listQuery.appName"> </el-input>
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="规则组名称" v-model="listQuery.groupName"> </el-input>
+      <el-form :inline="true" :model="listQuery" class="demo-form-inline">
+      <el-form-item label="服务名称:">
+        <el-input @keyup.enter.native="handleFilter"   class="filter-item" placeholder="服务名称" v-model="listQuery.appName"> </el-input>
+      </el-form-item>
+
+    <el-form-item label="规则组名称:">
+      <el-input @keyup.enter.native="handleFilter" class="filter-item" placeholder="规则组名称" v-model="listQuery.groupName"> </el-input>
+    </el-form-item> 
+    <el-form-item label="选择时间区间:">
+       <el-date-picker v-model="listQuery.startDate" @change="getStartTime" type="datetime" placeholder="选择日期时间"> </el-date-picker>
+       <el-date-picker v-model="listQuery.endDate"  @change="getEndTime"  type="datetime" placeholder="选择日期时间"> </el-date-picker>
+    </el-form-item>
         <template >
-          <el-select v-model="listQuery.status" placeholder="请选择状态"  class="filter-item">
+          <el-select v-model="listQuery.status" placeholder="请选择状态"  style="width: 100px;" class="filter-item">
             <el-option  v-for="item in statusMapselect" :key="item.value"  :label="item.label"  :value="item.value">
             </el-option>
           </el-select>
         </template>
     <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button> 
+      </el-form>
   </div>
   
 <el-table :key='tableKey' :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%">
@@ -145,7 +156,9 @@ export default {
         page: 1,
         limit: 20,
         groupName: undefined,
-        appName:undefined
+        appName:undefined,
+        endDate:"",
+        startDate:""
       },
       dialogForScript: false,
       showScriptdata: undefined,
@@ -252,6 +265,14 @@ export default {
         groupName:undefined,
         status: undefined
       };
+    },
+    getStartTime(date){
+          this.listQuery.startDate =new Date(date).getTime()
+          console.log(this.listQuery.startTime);
+        },
+      getEndTime(date){
+      this.listQuery.endDate =new Date(date).getTime()
+      console.log(this.listQuery.endTime);
     }
   }
 };
