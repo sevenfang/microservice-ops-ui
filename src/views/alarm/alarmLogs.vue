@@ -157,8 +157,8 @@ export default {
         limit: 20,
         groupName: undefined,
         appName:undefined,
-        endDate:"",
-        startDate:""
+        endDate:undefined,
+        startDate:undefined
       },
       dialogForScript: false,
       showScriptdata: undefined,
@@ -267,11 +267,11 @@ export default {
       };
     },
     getStartTime(date){
-          this.listQuery.startDate =new Date(date).getTime()
+          this.listQuery.startTime =new Date(date).getTime()
           console.log(this.listQuery.startTime);
         },
       getEndTime(date){
-      this.listQuery.endDate =new Date(date).getTime()
+      this.listQuery.endTime =new Date(date).getTime()
       console.log(this.listQuery.endTime);
     }
   }
