@@ -4,7 +4,7 @@
     <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="规则组名称"  v-model="listQuery.groupName" > </el-input>
      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="规则名称"   v-model="listQuery.ruleName" > </el-input>
      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="规则关键字"   v-model="listQuery.keyword" > </el-input>
-     <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="服务名"   v-model="listQuery.appName" > </el-input>  
+     <!-- <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="服务名"   v-model="listQuery.appName" > </el-input>   -->
      <el-select v-model="listQuery.status" style="width: 200px;" class="filter-item" placeholder="请选择状态"> 
         <el-option  v-for="item in statusOptions" :key="item.label"  :label="item.label" :value="item.value">
         </el-option>
