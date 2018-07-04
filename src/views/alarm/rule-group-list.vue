@@ -4,10 +4,11 @@
     <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="规则组名称"  v-model="listQuery.groupName" > </el-input>
      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="规则名称"   v-model="listQuery.ruleName" > </el-input>
      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="规则关键字"   v-model="listQuery.keyword" > </el-input>
-     <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="服务名"   v-model="listQuery.appName" > </el-input>  
-     <el-select v-model="listQuery.status" style="width: 200px;" class="filter-item" placeholder="请选择">
-        <el-option  v-for="item in statusOptions" :key="item.value"  :label="item.label" :value="item.value">
+     <!-- <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="服务名"   v-model="listQuery.appName" > </el-input>   -->
+     <el-select v-model="listQuery.status" style="width: 200px;" class="filter-item" placeholder="请选择状态"> 
+        <el-option  v-for="item in statusOptions" :key="item.label"  :label="item.label" :value="item.value">
         </el-option>
+        <el-option label="全部状态" value=""></el-option>
      </el-select> 
     <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
     <el-button class="filter-item" v-if="groupTypeManager_btn_add" style="margin-left: 10px;" @click="handleCreate" type="primary" icon="edit">添加</el-button>
@@ -175,10 +176,11 @@ export default {
           true:"已启动",
           false:"已禁用"
         }, 
-       statusOptions: [{
+       statusOptions: [
+         {
           value: 1,
           label: '启用'
-        }, {
+        },{
           value: 0,
           label: '禁用'
         }],

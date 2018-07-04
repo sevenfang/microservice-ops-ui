@@ -37,7 +37,7 @@
           <el-form  label-width="100px">
                
               <el-form-item label="资源范围:" style="width: 800px;"> 
-                <el-select v-model="form.ipAppList"  multiple  filterable  allow-create  default-first-option placeholder="请选择活动范围" size="medium" style="width:360px">
+                <el-select v-model="form.ipAppList"  multiple  filterable  allow-create  default-first-option placeholder="请选择服务名或填写ip" size="medium" style="width:360px">
                   <el-option v-for="item in serviceList"  :key="item.id" :label="item.appName"   :value="item.appName"></el-option>  
                 </el-select>
               </el-form-item>
@@ -103,7 +103,7 @@
             </el-form-item>
             <el-form-item label="警告方式:">  
                  <el-radio-group v-model="form.alarmType"  border=true size="medium">
-                      <el-radio  label="phone" >手机+邮件</el-radio>
+                      <!-- <el-radio  label="phone" >手机+邮件</el-radio> -->
                       <el-radio  label="mail"  >邮件</el-radio>
                   </el-radio-group>
             </el-form-item>
@@ -128,7 +128,7 @@
 
       <!-- 模态框 -->
   <el-dialog  title="报警用户组选择"   :visible.sync="dialogFormVisible">
-    <el-checkbox>是否包括子菜单用户</el-checkbox>
+    <!-- <el-checkbox>是否包括子菜单用户</el-checkbox> -->
        <el-tree class="filter-tree" check-strictly :node-key="getTreeNodeKey" :data="treeData" show-checkbox node-key="id" highlight-current :props="defaultProps" :filter-node-method="filterNode" ref="menuTree" @node-click="getNodeData" default-expand-all>
       </el-tree> 
       
@@ -160,7 +160,7 @@ export default {
         descr: undefined,
         ipAppList: [],
         userGroupIds: undefined,
-        alarmType: undefined,
+        alarmType: "mail",
         mailTitle: undefined,
         mailContent: undefined,
         alarmRules: []

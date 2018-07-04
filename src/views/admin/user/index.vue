@@ -119,7 +119,8 @@ export default {
         password: [
           {
             required: true,
-            message: "请输入密码",
+            message: "密码长度最少8位;必须含有大小写,字母,数据和特殊符号中的三项",
+            pattern:/^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\W_]+$)(?![a-z0-9]+$)(?![a-z\W_]+$)(?![0-9\W_]+$)[a-zA-Z0-9\W_]{8,}$/,
             trigger: "blur"
           },
           {

@@ -268,3 +268,9 @@
    }
    return targetObj;
  }
+
+
+ export function getLocalTime(ms) {
+  if(ms==null) return null;
+  return new Date(parseInt(ms)).toLocaleString('chinese',{hour12:false}).replace(/年|月/g, "-").replace(/日/g, " ");
+}
