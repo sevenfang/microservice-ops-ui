@@ -169,6 +169,21 @@ export const constantRouterMap = [{
     name: '注册中心'
   }]
 },
+
+// /hyperlink/index
+{
+  path: '/hyperlink/index',
+  component: Layout,
+  redirect: '/hyperlink/common/index',
+  icon: 'form',
+  noDropdown: true,
+  children: [{
+    path: '/',
+    component: _import('hyperlink/common/index'),
+    
+  }]
+},
+
 {
   path: '/monitor/pinpoint',
   component: Layout,
