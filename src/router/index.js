@@ -71,6 +71,19 @@ export const constantRouterMap = [{
     name: '服务路由'
   }]
 },
+// /router/routerVersion
+{
+  path: '/router/routerVersion',
+  component: Layout,
+  redirect: '/gate/routerVersion',
+  icon: 'form',
+  noDropdown: true,
+  children: [{
+    path: '/',
+    component: _import('gate/routerVersion'),
+    name: '服务路由版本'
+  }]
+},
 {
   path: '/filter/groovyFilter',
   component: Layout,
@@ -180,7 +193,7 @@ export const constantRouterMap = [{
   children: [{
     path: '/',
     component: _import('hyperlink/common/index'),
-    
+    name:'/hyperlink/index'
   }]
 },
 

@@ -1,7 +1,7 @@
  <template>
 <div class="app-container calendar-list-container">
   <div class="filter-container">
-    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="URL" v-model="listQuery.uri"> </el-input>
+    <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="serviceId" v-model="listQuery.serviceId"> </el-input>
     <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter">搜索</el-button>
     <el-button class="filter-item" v-if="groupTypeManager_btn_add" style="margin-left: 10px;" @click="handleCreate" type="primary" icon="edit">添加</el-button>
   </div>
@@ -10,17 +10,17 @@
  
   <el-table-column  type="index" :index="indexMethod">
     </el-table-column> 
-   
-    <el-table-column  align="center" label="uri">
-        <template scope="scope">
-            <span>{{scope.row.uri}}</span>
-        </template>
-    </el-table-column> 
-    <el-table-column  align="center" label="serviceId">
+     <el-table-column  align="center" label="serviceId">
         <template scope="scope">
             <span>{{scope.row.serviceId}}</span>
         </template>
     </el-table-column> 
+    <el-table-column  align="center" label="version">
+        <template scope="scope">
+            <span>{{scope.row.version}}</span>
+        </template>
+    </el-table-column> 
+  
 
     <el-table-column align="center" label="操作"  >
       
@@ -43,12 +43,12 @@
   <!-- 模态框 -->
   <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible"> 
     <el-form :model="form" :rules="rules" ref="form" label-width="100px">
- 
-        <el-form-item label="忽略URL" prop="uri">
-          <el-input v-model="form.uri" placeholder="请输入执行顺序"></el-input>
-        </el-form-item>   
+  
          <el-form-item label="serviceId" prop="serviceId">
           <el-input v-model="form.serviceId" placeholder="服务名称"></el-input>
+        </el-form-item> 
+         <el-form-item label="版本" prop="version">
+          <el-input v-model="form.version" placeholder="请输入版本"></el-input>
         </el-form-item>   
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -68,7 +68,7 @@ import {
   addObj,
   putObj,
   getObj
-} from "api/gate/ignore_uri";
+} from "api/gate/router_version";
 import { mapGetters } from "vuex";
 export default {
   name: "filter",
@@ -76,7 +76,7 @@ export default {
     return {
       form: {
         id: undefined,
-        uri: undefined, 
+        version: undefined, 
         serviceId:undefined,
       },
       rules: { 
@@ -220,7 +220,7 @@ export default {
     resetTemp() {
       this.form = { 
         serviceId: undefined,
-        url: undefined, 
+        version: undefined, 
       };
     }
   }
