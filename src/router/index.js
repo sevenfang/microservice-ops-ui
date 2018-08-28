@@ -39,12 +39,12 @@ export const constantRouterMap = [{
 {
   path: '/',
   component: Layout,
-  redirect: '/dashboard',
+  redirect: '/dashboard-ui',
   name: '首页',
   hidden: true,
   children: [{
-    path: 'dashboard',
-    component: _import('dashboard/index')
+    path: 'dashboard-ui',
+    component: _import('dashboard-ui/index')
   }]
 },
 {

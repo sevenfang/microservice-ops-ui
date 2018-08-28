@@ -257,7 +257,7 @@ export default {
     submitForm() {
       console.log(this.form);
       addAll(this.form).then(data => {
-        console.log(data);
+        // console.log(data);
         this.jumpList();
       });
     },

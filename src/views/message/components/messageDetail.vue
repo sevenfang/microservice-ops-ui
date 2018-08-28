@@ -106,7 +106,7 @@ export default {
   methods: {
     getMessageDetail() {
       this.listLoading = true;
-      console.log("getMessageDetail msgkey:" + this.msgKey);
+      // console.log("getMessageDetail msgkey:" + this.msgKey);
       getConsumedInfoList(this.msgKey).then(response => {
         this.list = response.data;
         this.listLoading = false;
@@ -121,7 +121,7 @@ export default {
 
     reconsume() {
       resendMessageByserviceUrl(this.reconsumeMsgKey, "consumer", this.reconsumeServiceUrl).then(response => {
-              console.log(response);
+              // console.log(response);
               if(response.success){
                 this.$notify({
                   title: '成功',
