@@ -33,25 +33,37 @@ module.exports = {
           '/jwt': {
             // target: 'http://localhost:8765',
             // target: 'http://localhost:8766',
-            target: 'http://10.180.4.222:9000', 
+            // target: 'http://10.180.4.222:9000', 
+            target: 'http://localhost:9000', 
             pathRewrite: {
               '^/jwt': '/jwt'
             },
           },
           '/api':{
             // target: 'http://localhost:8765',
-            // target: 'http://localhost:8766',
-            target: 'http://10.180.4.222:9000', 
+            // target: 'http://localhost:8766', 
+            // target: 'http://10.180.4.222:9000', 
+            target: 'http://localhost:9000',  
             pathRewrite: {
               '^/api': '/api'
             },
           },
-          '/task':{ 
-            target: 'http://127.0.0.1:8001', 
+          '/url':{
+            // target: 'http://localhost:8765',
+            // target: 'http://localhost:8766', 
+            // target: 'http://10.180.4.222:9000', 
+            target: 'http://localhost:9000',  
             pathRewrite: {
-              '^/task': '/task'
+              '^/apiUrl': '/apiUrl'
             },
           }
+          ,
+          // '/taskManager':{ 
+          //   target: 'http://127.0.0.1:9009', 
+          //   pathRewrite: {
+          //     '^/taskManager': '/taskManager'
+          //   },
+          // }
           
         },
         // CSS Sourcemaps off by default because relative paths are "buggy"

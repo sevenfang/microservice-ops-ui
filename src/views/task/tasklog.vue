@@ -24,7 +24,7 @@
 
     <!-- <el-table-column  type="index" :index="indexMethod">
     </el-table-column> -->
-  <el-table-column width="130px" align="center" label="cron表达式">
+  <el-table-column width="130px" align="center" label="Id">
         <template scope="scope">
             <span> {{scope.row.id}}</span>
         </template>

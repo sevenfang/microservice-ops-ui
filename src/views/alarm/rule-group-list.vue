@@ -209,7 +209,7 @@ export default {
       this.listLoading = true;
       groupUserlist({ruleGroupId:row.ruleGroupId}).then(response=>{
         this.userGroupList=response.data;
-       console.log(this.userGroupList);
+      //  console.log(this.userGroupList);
        this.listLoading = false;
       });
     },

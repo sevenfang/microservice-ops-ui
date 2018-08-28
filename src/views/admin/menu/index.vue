@@ -29,7 +29,7 @@
   </el-col>
   <el-col :span="16" style='margin-top:15px;'>
      <el-card class="box-card">
-    <el-form :label-position="labelPosition" :rules="rules" label-width="80px" :model="form" ref="form">
+    <el-form :label-position="labelPosition" :rules="rules2" label-width="80px" :model="form" ref="form">
       <el-form-item label="路径编码" prop="code">
           <el-input v-model="form.code" :disabled="formEdit" placeholder="请输入路径编码"></el-input>
       </el-form-item>
@@ -51,7 +51,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="排序" prop="orderNum">
-          <el-input v-model="form.orderNum"  :disabled="formEdit" placeholder="请输入排序"></el-input>
+          <el-input v-model.number="form.orderNum"  :disabled="formEdit" placeholder="请输入排序"></el-input>
       </el-form-item>
       <el-form-item label="描述"   prop="description">
           <el-input v-model="form.description" :disabled="formEdit" placeholder="请输入描述"></el-input>
@@ -117,19 +117,16 @@ export default {
         parentId: undefined,
         href: undefined,
         icon: undefined,
-        orderNum: undefined,
+        orderNum: '',
         description: undefined,
         path: undefined,
         enabled: undefined,
         type: undefined,
         attr1: undefined
       },
-      rules: {
+      rules2: {
         orderNum: [
-          {
-            type: "number",
-            message: "请输入数字"
-          }
+          { type: 'number', message: '序号必须为数字值'}
         ]
       },
       currentId: -1,
@@ -237,7 +234,7 @@ export default {
         parentId: this.currentId,
         href: undefined,
         icon: undefined,
-        orderNum: undefined,
+        orderNum:'',
         description: undefined,
         path: undefined,
         enabled: undefined,

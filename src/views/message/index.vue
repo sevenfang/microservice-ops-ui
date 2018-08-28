@@ -309,7 +309,7 @@ export default {
 
     resendMsg() {
       resendMessageByserviceUrl(this.resendMsgKey, "producer", this.resendServiceUrl).then(response => {
-              console.log(response);
+              // console.log(response);
               if(response.success){
                 this.$notify({
                   title: '成功',
@@ -340,7 +340,7 @@ export default {
     getList() {
       this.listLoading = true;
       getMessageList(this.listQuery).then(response => {
-        console.log("走这里了吗");
+        // console.log("走这里了吗");
         this.list = response.data.rows;
         this.total = response.data.total;
         this.listLoading = false;
@@ -431,7 +431,7 @@ export default {
       this.dialogDetailVisible = true;
       this.msgKey = row.msgKey;
       if (this.$refs.messageDetail !== undefined) {
-        console.log(row.msgKey);
+        // console.log(row.msgKey);
         this.$refs.messageDetail.msgKey = this.msgKey;
         this.$refs.messageDetail.getMessageDetail();
       }

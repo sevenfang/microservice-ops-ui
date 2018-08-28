@@ -39,12 +39,12 @@ export const constantRouterMap = [{
 {
   path: '/',
   component: Layout,
-  redirect: '/dashboard',
+  redirect: '/dashboard-ui',
   name: '首页',
   hidden: true,
   children: [{
-    path: 'dashboard',
-    component: _import('dashboard/index')
+    path: 'dashboard-ui',
+    component: _import('dashboard-ui/index')
   }]
 },
 {
@@ -69,6 +69,19 @@ export const constantRouterMap = [{
     path: '/',
     component: _import('gate/index'),
     name: '服务路由'
+  }]
+},
+// /router/routerVersion
+{
+  path: '/router/routerVersion',
+  component: Layout,
+  redirect: '/gate/routerVersion',
+  icon: 'form',
+  noDropdown: true,
+  children: [{
+    path: '/',
+    component: _import('gate/routerVersion'),
+    name: '服务路由版本'
   }]
 },
 {
@@ -180,7 +193,7 @@ export const constantRouterMap = [{
   children: [{
     path: '/',
     component: _import('hyperlink/common/index'),
-    
+    name:'/hyperlink/index'
   }]
 },
 
